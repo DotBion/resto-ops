@@ -61,9 +61,10 @@ function describe(item: TimelineItem): string {
   if (item.type === "fixit.buy_click") return `Checkout opened (${d.path}): ${d.title} · ${d.shop}`;
   if (item.type === "fixit.checkout_created") return `Shop checkout created at ${d.shop} (${d.status ?? "?"})`;
   if (item.type === "fixit.error") return `Fix-It error: ${d.message}`;
-  if (item.type === "task") return `Staff task: ${d.title ?? d.summary ?? d.kind ?? "task"} (${d.status ?? ""})`;
+  if (item.type === "task") return `Staff task ${d.status ?? d.action ?? ""}: ${d.reason ?? d.kind ?? "queue needs attention"} (queue ${d.queue_min ?? "?"}${d.queue_max !== d.queue_min ? `-${d.queue_max}` : ""})`;
+  if (item.type === "review_completed") return `Queue check (${String(d.tool ?? "review").replace(/_/g, " ")}): ${d.outcome ?? ""}${d.summary ? ` · ${d.summary}` : ""}`;
+  if (item.type === "error") return `Queue error: ${d.message ?? d.detail ?? JSON.stringify(d).slice(0, 80)}`;
   if (item.type === "run_status") return `Queue run ${d.status}`;
-  if (item.type === "decision") return `Queue decision: ${d.summary ?? d.action ?? d.kind ?? JSON.stringify(d).slice(0, 80)}`;
   return `${item.type}: ${JSON.stringify(d).slice(0, 100)}`;
 }
 

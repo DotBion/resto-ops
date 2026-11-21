@@ -130,7 +130,7 @@ class Journal:
             ).fetchall()
             queue = db.execute(
                 "SELECT seq,run_id,kind,payload,created_ms FROM events WHERE kind IN "
-                "('task','decision','review_completed','run_status','error') ORDER BY seq DESC LIMIT ?", (limit,),
+                "('task','review_completed','run_status','error') ORDER BY seq DESC LIMIT ?", (limit,),
             ).fetchall()
         items = [{"module": row["module"], "type": row["kind"], "data": json.loads(row["payload"]),
                   "created_ms": row["created_ms"]} for row in ops]
