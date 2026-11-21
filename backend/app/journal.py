@@ -30,6 +30,10 @@ class Journal:
                     kind TEXT NOT NULL, payload TEXT NOT NULL, created_ms INTEGER NOT NULL
                 );
                 CREATE INDEX IF NOT EXISTS events_by_run ON events(run_id, seq);
+                CREATE TABLE IF NOT EXISTS ops_log (
+                    seq INTEGER PRIMARY KEY, module TEXT NOT NULL, kind TEXT NOT NULL,
+                    payload TEXT NOT NULL, created_ms INTEGER NOT NULL
+                );
                 """
             )
 
@@ -108,3 +112,29 @@ class Journal:
              "created_ms": row["created_ms"]}
             for row in rows
         ]
+
+    # ---- Shared operations timeline -------------------------------------------------------
+    # Fix-It scans/buys are written to ops_log; queue tasks and alerts already live in events.
+    # timeline() merges both into one newest-first feed for the copilot (and the Carbon review).
+    def log(self, module: str, kind: str, payload: dict) -> None:
+        with self.connection() as db:
+            db.execute(
+                "INSERT INTO ops_log(module,kind,payload,created_ms) VALUES (?, ?, ?, ?)",
+                (module, kind, json.dumps(payload, default=str), now_ms()),
+            )
+
+    def timeline(self, limit: int = 100) -> list[dict]:
+        with self.connection() as db:
+            ops = db.execute(
+                "SELECT seq,module,kind,payload,created_ms FROM ops_log ORDER BY seq DESC LIMIT ?", (limit,),
+            ).fetchall()
+            queue = db.execute(
+                "SELECT seq,run_id,kind,payload,created_ms FROM events WHERE kind IN "
+                "('task','decision','review_completed','run_status','error') ORDER BY seq DESC LIMIT ?", (limit,),
+            ).fetchall()
+        items = [{"module": row["module"], "type": row["kind"], "data": json.loads(row["payload"]),
+                  "created_ms": row["created_ms"]} for row in ops]
+        items += [{"module": "queue", "type": row["kind"], "run_id": row["run_id"],
+                   "data": json.loads(row["payload"]), "created_ms": row["created_ms"]} for row in queue]
+        items.sort(key=lambda item: item["created_ms"], reverse=True)
+        return items[:limit]

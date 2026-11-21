@@ -13,8 +13,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from fastapi import FastAPI, File, Form, HTTPException, UploadFile  # noqa: E402
-from fastapi.responses import FileResponse, JSONResponse, StreamingResponse  # noqa: E402
+from fastapi import APIRouter, FastAPI, File, Form, HTTPException, UploadFile  # noqa: E402
+from fastapi.responses import FileResponse, JSONResponse, RedirectResponse, StreamingResponse  # noqa: E402
 from fastapi.staticfiles import StaticFiles  # noqa: E402
 from pydantic import BaseModel  # noqa: E402
 
@@ -24,16 +24,29 @@ from .shop_mcp import ShopMCP, ShopMCPError  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 MAX_UPLOAD_MB = int(os.getenv("MAX_UPLOAD_MB", "200"))
 
-app = FastAPI(title="Fix-It Cam")
-app.mount("/static", StaticFiles(directory=ROOT / "static"), name="static")
+# All Fix-It API routes live on `router`, so the same code serves two hosts:
+#   * standalone Fix-It Cam (this module's `app`): router at /api, page at /
+#   * restaurant-ops copilot (backend/app/main.py): router at /api/fixit, page at /fixit/
+router = APIRouter()
+
+# Optional event sinks: callables (kind: str, payload: dict) -> None. The restaurant-ops app
+# registers its SQLite journal here so Fix-It scans and buys land on the shared timeline.
+EVENT_SINKS: list = []
 
 
-@app.get("/")
-async def index():
+def emit(kind: str, payload: dict) -> None:
+    for sink in list(EVENT_SINKS):
+        try:
+            sink(kind, payload)
+        except Exception:  # logging must never break a scan or a checkout
+            pass
+
+
+def index_response():
     return FileResponse(ROOT / "static" / "index.html", headers={"Cache-Control": "no-store"})
 
 
-@app.get("/api/health")
+@router.get("/health")
 async def health():
     return {"ok": True, "identify_model": gemini.IDENTIFY_MODEL, "rank_model": gemini.RANK_MODEL,
             "gate_model": gemini.DECISION_MODEL, "gemini_key": bool(os.getenv("GEMINI_API_KEY"))}
@@ -62,7 +75,7 @@ async def _save_upload(f: UploadFile) -> tuple[str, str]:
     return tmp.name, mime
 
 
-@app.post("/api/analyze")
+@router.post("/analyze")
 async def analyze(files: list[UploadFile] = File(default=[]), file: UploadFile | None = File(default=None),
                   note: str = Form("")):
     """Accepts one video, one photo, or several photos (keyframes of a clip, in order)."""
@@ -97,6 +110,8 @@ async def analyze(files: list[UploadFile] = File(default=[]), file: UploadFile |
             diag = await gemini.diagnose(part, note)
             timings["diagnose_s"] = round(time.time() - t, 2)
             yield _ev("diagnosis", diagnosis=diag, timings=timings)
+            emit("fixit.diagnosis", {"diagnosis": diag, "note": note[:200], "media": mime,
+                                     "timings": dict(timings)})
 
             frame = None
             if pipeline.is_video(mime):
@@ -129,8 +144,17 @@ async def analyze(files: list[UploadFile] = File(default=[]), file: UploadFile |
             timings["rank_s"] = round(time.time() - t, 2)
             timings["total_s"] = round(time.time() - t_all, 2)
             yield _ev("results", top=top, considered=len(cands), timings=timings)
+            emit("fixit.results", {
+                "item": diag.get("item"), "part": diag.get("broken_part"), "replace": diag.get("replace"),
+                "confidence": diag.get("confidence"), "considered": len(cands),
+                "fit": [{"title": c.get("title"), "shop": c.get("shop"), "fit": c.get("fit")} for c in cands[:8]],
+                "top": [{"title": o.get("title"), "shop": o.get("shop"), "price_minor": o.get("price_minor"),
+                         "currency": o.get("currency"), "fit": o.get("fit"), "product_url": o.get("product_url")}
+                        for o in (top or [])],
+                "timings": timings})
         except Exception as e:
             yield _ev("error", message=str(e)[:400])
+            emit("fixit.error", {"message": str(e)[:400]})
         finally:
             await shop.aclose()
             for p, _ in saved:
@@ -143,13 +167,29 @@ async def analyze(files: list[UploadFile] = File(default=[]), file: UploadFile |
                              headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"})
 
 
+class BuyClick(BaseModel):
+    path: str = "checkout_url"  # "checkout_url" (primary) or "create_checkout" (Shop fallback)
+    title: str = ""
+    shop: str = ""
+    price_minor: int | None = None
+    currency: str | None = None
+    fit: float | None = None
+
+
+@router.post("/buy-click")
+async def buy_click(click: BuyClick):
+    """Beacon from the page when a shopper taps Checkout; only logged, never completes a purchase."""
+    emit("fixit.buy_click", click.model_dump())
+    return {"ok": True}
+
+
 class CheckoutReq(BaseModel):
     shop: str
     variant_id: str
     quantity: int = 1
 
 
-@app.post("/api/checkout")
+@router.post("/checkout")
 async def checkout(req: CheckoutReq):
     """Create a real Shop checkout for one merchant and return continue_url exactly as returned.
     The shopper reviews and pays on the merchant page; we never call complete_checkout."""
@@ -164,6 +204,8 @@ async def checkout(req: CheckoutReq):
     if not url:
         return JSONResponse({"error": "No checkout link returned", "messages": r.get("messages")}, status_code=502)
     total = next((t.get("amount") for t in r.get("totals", []) if t.get("type") == "total"), None)
+    emit("fixit.checkout_created", {"shop": req.shop, "variant_id": req.variant_id, "status": r.get("status"),
+                                    "total_minor": total, "currency": r.get("currency")})
     return {"continue_url": url, "status": r.get("status"), "total_minor": total, "currency": r.get("currency")}
 
 
@@ -186,19 +228,19 @@ def _load_labels() -> dict:
         return {}
 
 
-@app.get("/eval-upload")
+@router.get("/eval-upload-page")
 async def eval_upload_page(k: str = ""):
     _check_key(k)
     return FileResponse(ROOT / "static" / "eval_upload.html", headers={"Cache-Control": "no-store"})
 
 
-@app.get("/api/eval-clips")
+@router.get("/eval-clips")
 async def eval_clips(k: str = ""):
     _check_key(k)
     return _load_labels()
 
 
-@app.post("/api/eval-upload")
+@router.post("/eval-upload")
 async def eval_upload(files: list[UploadFile] = File(...), keywords: str = Form(...),
                       description: str = Form(""), k: str = Form("")):
     _check_key(k)
@@ -221,6 +263,18 @@ async def eval_upload(files: list[UploadFile] = File(...), keywords: str = Form(
         saved.append(name)
     LABELS.write_text(json.dumps(labels, indent=2))
     return {"saved": saved, "total_clips": len(labels)}
+
+
+def create_standalone_app() -> FastAPI:
+    standalone = FastAPI(title="Fix-It Cam")
+    standalone.mount("/static", StaticFiles(directory=ROOT / "static"), name="static")
+    standalone.add_api_route("/", index_response, methods=["GET"])
+    standalone.add_api_route("/eval-upload", eval_upload_page, methods=["GET"])
+    standalone.include_router(router, prefix="/api")
+    return standalone
+
+
+app = create_standalone_app()
 
 
 def main():

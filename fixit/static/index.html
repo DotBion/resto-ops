@@ -102,8 +102,12 @@ footer{color:var(--mut);font-size:12px;text-align:center;margin-top:28px}
   </div>
   <footer>Live products via Shop MCP • checkouts are real: you review &amp; pay on the merchant's page • Powered by Gemini 4</footer>
 </main>
-<script src="/static/upload.js"></script>
+<script src="static/upload.js"></script>
 <script>
+// Same page runs standalone (API at /api) or inside the restaurant-ops copilot (page /fixit/, API /api/fixit).
+const API=location.pathname.startsWith('/fixit')?'/api/fixit':'/api';
+function logBuy(p,path){ try{ fetch(API+'/buy-click',{method:'POST',headers:{'Content-Type':'application/json'},keepalive:true,
+  body:JSON.stringify({path,title:p.title||'',shop:p.shop||'',price_minor:p.price_minor??null,currency:p.currency||null,fit:p.fit??null})}) }catch(e){} }
 const $=s=>document.querySelector(s);
 let file=null, videoEl=null;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -172,15 +176,15 @@ async function buy(p,btn){
   const w=window.open('about:blank','_blank'); // open synchronously so popup blockers allow it
   const label=btn.textContent; btn.disabled=true;btn.textContent='Creating checkout…';
   try{
-    const r=await fetch('/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({shop:p.shop,variant_id:p.variant_id})});
+    const r=await fetch(API+'/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({shop:p.shop,variant_id:p.variant_id})});
     const j=await r.json(); if(!r.ok||!j.continue_url) throw new Error(j.error||'Checkout failed');
     if(w) w.location.href=j.continue_url; else location.href=j.continue_url; // URL used exactly as returned
     btn.textContent='Checkout opened ✓';
   }catch(e){ if(w) w.close(); btn.textContent=label; btn.disabled=false; alert(e.message) }
 }
 $('#sh-go').onclick=()=>{ const p=sheetItem; if(!p) return;
-  if(p.checkout_url){ openCheckout(p.checkout_url); closeSheet() } else buy(p,$('#sh-go')) };
-$('#sh-alt').onclick=e=>{ e.preventDefault(); if(sheetItem) buy(sheetItem,$('#sh-alt')) };
+  if(p.checkout_url){ logBuy(p,'checkout_url'); openCheckout(p.checkout_url); closeSheet() } else { logBuy(p,'create_checkout'); buy(p,$('#sh-go')) } };
+$('#sh-alt').onclick=e=>{ e.preventDefault(); if(sheetItem){ logBuy(sheetItem,'create_checkout'); buy(sheetItem,$('#sh-alt')) } };
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeSheet() });
 function setProg(pct,text){ $('#prog').classList.remove('hidden'); if(pct!=null) $('#bar').style.width=pct+'%'; $('#progt').textContent=text||'' }
 $('#go').onclick=async()=>{
@@ -197,7 +201,7 @@ $('#go').onclick=async()=>{
     stage('send',`Uploading ${prep.mode==='frames'?prep.files.length+' keyframes':'clip'} (${U.fmtMB(total)})…`);
     setProg(0,`0 / ${U.fmtMB(total)}`);
     let lastT=Date.now(),lastB=0;
-    await U.upload('/api/analyze',fd,{
+    await U.upload(API+'/analyze',fd,{
       onProgress:(b,t)=>{const T=t||total; setProg(Math.round(100*b/T),`${U.fmtMB(b)} / ${U.fmtMB(T)} uploaded (${Math.round(100*b/T)}%)`); if(b>=T) setProg(100,'Uploaded ✓ Gemini 4 is on it…')},
       onChunk:txt=>{buf+=txt;let i;while((i=buf.indexOf('\n'))>=0){const line=buf.slice(0,i);buf=buf.slice(i+1);if(line.trim())handle(JSON.parse(line))}}
     });

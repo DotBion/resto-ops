@@ -11,10 +11,11 @@ li{font-size:14px;margin:4px 0}small{color:#9aa4b2}</style></head><body><main>
 <label>What it is (optional, for the failure log)</label><input id="desc" type="text" placeholder="frayed MacBook Pro 2015 charger">
 <button id="go">Upload</button><div id="msg" style="margin-top:10px"></div><div style="height:8px;background:#222833;border-radius:6px;overflow:hidden;margin-top:8px"><div id="bar" style="height:100%;width:0;background:#ff7a1a"></div></div></div>
 <div class="card"><b>Clips so far</b> <small id="n"></small><ul id="list"></ul></div>
-<script src="/static/upload.js"></script>
+<script src="static/upload.js"></script>
+<script>const API=location.pathname.startsWith('/fixit')?'/api/fixit':'/api';</script>
 <script>
 const K=new URLSearchParams(location.search).get('k')||'';const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-async function load(){const r=await fetch('/api/eval-clips?k='+encodeURIComponent(K));const j=await r.json();const e=Object.entries(j);
+async function load(){const r=await fetch(API+'/eval-clips?k='+encodeURIComponent(K));const j=await r.json();const e=Object.entries(j);
 document.getElementById('n').textContent=`(${e.length})`;document.getElementById('list').innerHTML=e.reverse().map(([n,v])=>`<li>${esc(n)} — <small>${esc(v.keywords.join(', '))}</small></li>`).join('')}
 document.getElementById('go').onclick=async()=>{const fs=[...document.getElementById('f').files];const kw=document.getElementById('kw').value;
 if(!fs.length||!kw.trim()){alert('Pick clips and type keywords');return}
@@ -22,7 +23,7 @@ const U=window.FixItUpload,m=document.getElementById('msg'),bar=document.getElem
 try{const fd=new FormData();
  for(const [i,f] of fs.entries()){const p=await U.prepare(f,t=>m.textContent=`Clip ${i+1}/${fs.length}: ${t}`,{allowFrames:false});p.files.forEach(x=>fd.append('files',x,(f.name||'clip').replace(/\.[^.]+$/,'')+'.'+(x.name.split('.').pop())))}
  fd.append('keywords',kw);fd.append('description',document.getElementById('desc').value);fd.append('k',K);
- const r=JSON.parse(await U.upload('/api/eval-upload',fd,{onProgress:(b,t)=>{bar.style.width=(t?100*b/t:0)+'%';m.textContent=`Uploading ${U.fmtMB(b)}${t?' / '+U.fmtMB(t):''}`}}));
+ const r=JSON.parse(await U.upload(API+'/eval-upload',fd,{onProgress:(b,t)=>{bar.style.width=(t?100*b/t:0)+'%';m.textContent=`Uploading ${U.fmtMB(b)}${t?' / '+U.fmtMB(t):''}`}}));
  m.textContent=`Saved ${r.saved.length} clip(s). Total: ${r.total_clips}`;document.getElementById('f').value='';load();
 }catch(e){m.textContent='Error: '+e.message}finally{go.disabled=false}};
 load();

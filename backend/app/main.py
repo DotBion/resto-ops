@@ -9,7 +9,7 @@ from typing import Annotated, Literal
 
 import httpx
 from fastapi import FastAPI, File, Form, Header, HTTPException, Query, Request, UploadFile
-from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
+from fastapi.responses import FileResponse, JSONResponse, RedirectResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
@@ -20,6 +20,9 @@ from .media import (MAX_CAMERA_JPEG_BYTES, MAX_UPLOAD_BYTES, CameraFrames, Media
 from .models import GeminiVision
 from .runs import RunConflict, Runs
 from .settings import ROOT, Settings
+from fixit.app import server as fixit_server
+
+FIXIT_STATIC = ROOT / "fixit" / "static"
 
 DEMO_ID = "counter-demo-v1"
 
@@ -40,6 +43,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             source = await asyncio.to_thread(prepare, demo, dest, DEMO_ID, "Counter & seating", "synthetic")
             journal.add_source(source)
         app.state.journal = journal
+        sink = lambda kind, payload: journal.log("fixit", kind, payload)  # noqa: E731
+        fixit_server.EVENT_SINKS.append(sink)
         app.state.upload_lock = asyncio.Semaphore(1)
         async with httpx.AsyncClient(follow_redirects=False) as client:
             app.state.runs = Runs(journal, settings, GeminiVision(settings, client))
@@ -53,9 +58,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                     runner.finish("interrupted")
                 if workers:
                     await asyncio.gather(*workers, return_exceptions=True)
+                if sink in fixit_server.EVENT_SINKS:
+                    fixit_server.EVENT_SINKS.remove(sink)
 
-    app = FastAPI(title="Café Ops", lifespan=lifespan)
-    app.add_middleware(TrustedHostMiddleware, allowed_hosts=["localhost", "127.0.0.1", "testserver"])
+    app = FastAPI(title="Restaurant Ops Copilot", lifespan=lifespan)
+    app.add_middleware(TrustedHostMiddleware, allowed_hosts=settings.allowed_hosts)
 
     @app.middleware("http")
     async def validate_request(request: Request, call_next):
@@ -219,6 +226,34 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         if not report.is_file():
             raise HTTPException(404, "No evaluation report has been run.")
         return FileResponse(report, media_type="application/json")
+
+    # ---- Fix-It Cam: film a broken thing -> diagnose -> Shop MCP -> fit check -> real checkout
+    app.include_router(fixit_server.router, prefix="/api/fixit", tags=["fixit"])
+
+    @app.get("/fixit", include_in_schema=False)
+    def fixit_redirect():
+        return RedirectResponse("/fixit/")
+
+    @app.get("/fixit/", include_in_schema=False)
+    def fixit_page():
+        return fixit_server.index_response()
+
+    @app.get("/fixit/eval-upload", include_in_schema=False)
+    def fixit_eval_page(k: str = ""):
+        fixit_server._check_key(k)
+        return FileResponse(FIXIT_STATIC / "eval_upload.html", headers={"Cache-Control": "no-store"})
+
+    app.mount("/fixit/static", StaticFiles(directory=FIXIT_STATIC), name="fixit-static")
+
+    @app.get("/api/health")
+    def health():
+        return {"ok": True, "queue_monitor": {"gemini_ready": bool(settings.api_key), "observer": settings.observer},
+                "fixit": {"identify_model": fixit_server.gemini.IDENTIFY_MODEL,
+                          "gate_model": fixit_server.gemini.DECISION_MODEL}}
+
+    @app.get("/api/timeline")
+    def timeline(limit: Annotated[int, Query(ge=1, le=500)] = 100):
+        return app.state.journal.timeline(limit)
 
     static = ROOT / "frontend" / "dist"
     if static.is_dir():

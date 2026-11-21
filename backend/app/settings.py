@@ -37,6 +37,8 @@ class Settings:
     max_lag_ms: int = 20000
     queue_threshold: int = 4
     persistence_ms: int = 2000
+    # Host header allow-list. Defaults cover local use plus a cloudflared quick tunnel.
+    allowed_hosts: list = field(default_factory=lambda: ["localhost", "127.0.0.1", "testserver", "*.trycloudflare.com"])
 
     @classmethod
     def from_env(cls) -> "Settings":
@@ -59,4 +61,6 @@ class Settings:
             max_lag_ms=integer("CAFE_MAX_OBSERVATION_LAG_MS", 20000, 1000, 30000),
             queue_threshold=integer("CAFE_QUEUE_THRESHOLD", 4, 2, 30),
             persistence_ms=integer("CAFE_PERSISTENCE_MS", 2000, 500, 20000),
+            allowed_hosts=[h.strip() for h in os.getenv(
+                "ALLOWED_HOSTS", "localhost,127.0.0.1,testserver,*.trycloudflare.com").split(",") if h.strip()],
         )

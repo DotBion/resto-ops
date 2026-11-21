@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { ArrowRight, ChevronRight, Coffee, History, LayoutDashboard, ListFilter, Radio } from "lucide-react";
+import { Activity, ArrowRight, ChevronRight, Coffee, ExternalLink, History, LayoutDashboard, ListFilter, Radio, Wrench } from "lucide-react";
 import "@fontsource-variable/dm-sans";
 import "@fontsource/instrument-serif/400.css";
 import { api, clock, Metrics, Report, SavedRun, Source } from "./api";
@@ -8,7 +8,7 @@ import { Monitor } from "./Monitor";
 import { useMonitor } from "./useMonitor";
 import "./styles.css";
 
-type View = "monitor" | "evaluation" | "history";
+type View = "monitor" | "fixit" | "timeline" | "evaluation" | "history";
 
 function App() {
   const [view, setView] = useState<View>("monitor");
@@ -16,12 +16,14 @@ function App() {
   return <>
     <header className="topbar">
       <div className="nav-inner">
-        <button className="brand" onClick={() => setView("monitor")} aria-label="Café Ops home">
+        <button className="brand" onClick={() => setView("monitor")} aria-label="Restaurant Ops home">
           <span className="brand-mark"><Coffee size={18} strokeWidth={1.9} /></span>
-          <span>Café Ops</span>
+          <span>Restaurant Ops</span>
         </button>
         <nav className="nav-tabs" aria-label="Workspace">
-          <button className={view === "monitor" ? "current" : ""} onClick={() => setView("monitor")}><LayoutDashboard size={15} /> Monitor</button>
+          <button className={view === "monitor" ? "current" : ""} onClick={() => setView("monitor")}><LayoutDashboard size={15} /> Queue Monitor</button>
+          <button className={view === "fixit" ? "current" : ""} onClick={() => setView("fixit")}><Wrench size={15} /> Fix-It</button>
+          <button className={view === "timeline" ? "current" : ""} onClick={() => setView("timeline")}><Activity size={15} /> Ops timeline</button>
           <button className={view === "evaluation" ? "current" : ""} onClick={() => setView("evaluation")}><ListFilter size={16} /> Evaluation</button>
           <button className={view === "history" ? "current" : ""} onClick={() => setView("history")}><History size={16} /> Run history</button>
         </nav>
@@ -29,12 +31,66 @@ function App() {
       </div>
     </header>
     <div hidden={view !== "monitor"}><Monitor monitor={monitor} /></div>
+    {view === "fixit" && <FixIt />}
+    {view === "timeline" && <Timeline />}
     {view === "evaluation" && <Evaluation />}
     {view === "history" && <RunHistory sources={monitor.sources} open={(run) => {
       monitor.loadRun(run);
       setView("monitor");
     }} />}
   </>;
+}
+
+function FixIt() {
+  // Fix-It Cam is its own mobile page served by the same backend at /fixit/ (same origin).
+  return <main className="fixit-pane">
+    <div className="fixit-bar">
+      <span>Film anything broken: Gemini 4 names the part, Shop MCP finds it, the Decisions API checks fit, you check out.</span>
+      <a href="/fixit/" target="_blank" rel="noopener">Open full screen / on phone <ExternalLink size={13} /></a>
+    </div>
+    <iframe className="fixit-frame" src="/fixit/" title="Fix-It Cam" allow="camera; microphone; clipboard-write" />
+  </main>;
+}
+
+type TimelineItem = { module: string; type: string; run_id?: string; data: Record<string, unknown>; created_ms: number };
+
+function describe(item: TimelineItem): string {
+  const d = item.data as Record<string, any>;
+  if (item.type === "fixit.diagnosis") return `Diagnosed ${d.diagnosis?.item ?? "item"}: ${d.diagnosis?.broken_part ?? "?"} (confidence ${Math.round((d.diagnosis?.confidence ?? 0) * 100)}%)`;
+  if (item.type === "fixit.results") return `Top pick: ${d.top?.[0]?.title ?? "none"} from ${d.considered ?? 0} live offers`;
+  if (item.type === "fixit.buy_click") return `Checkout opened (${d.path}): ${d.title} · ${d.shop}`;
+  if (item.type === "fixit.checkout_created") return `Shop checkout created at ${d.shop} (${d.status ?? "?"})`;
+  if (item.type === "fixit.error") return `Fix-It error: ${d.message}`;
+  if (item.type === "task") return `Staff task: ${d.title ?? d.summary ?? d.kind ?? "task"} (${d.status ?? ""})`;
+  if (item.type === "run_status") return `Queue run ${d.status}`;
+  if (item.type === "decision") return `Queue decision: ${d.summary ?? d.action ?? d.kind ?? JSON.stringify(d).slice(0, 80)}`;
+  return `${item.type}: ${JSON.stringify(d).slice(0, 100)}`;
+}
+
+function Timeline() {
+  const [items, setItems] = useState<TimelineItem[] | null>(null);
+  const [error, setError] = useState("");
+  useEffect(() => {
+    let live = true;
+    const load = () => fetch("/api/timeline?limit=150").then((r) => r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`)))
+      .then((data) => { if (live) { setItems(data); setError(""); } }).catch((e) => live && setError(String(e.message ?? e)));
+    load();
+    const timer = setInterval(load, 4000);
+    return () => { live = false; clearInterval(timer); };
+  }, []);
+  return <main className="timeline-pane">
+    <h2>Ops timeline</h2>
+    <p className="muted">Queue alerts and staff tasks plus Fix-It scans and checkouts, from one SQLite journal. This is the trace the (planned) Carbon closing review reads.</p>
+    {error && <p className="muted">Could not load timeline: {error}</p>}
+    {items && items.length === 0 && <p className="muted">Nothing yet. Run the queue demo or scan something in Fix-It.</p>}
+    <ul className="ops-list">
+      {(items ?? []).map((item, i) => <li key={`${item.module}-${item.created_ms}-${i}`}>
+        <span className="clock">{new Date(item.created_ms).toLocaleTimeString()}</span>
+        <span className={`ops-tag ${item.module}`}>{item.module === "fixit" ? "Fix-It" : "Queue"}</span>
+        <span>{describe(item)}</span>
+      </li>)}
+    </ul>
+  </main>;
 }
 
 const METRICS: { key: keyof Metrics; label: string; format?: "percent" | "ms" }[] = [

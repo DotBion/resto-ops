@@ -1,7 +1,7 @@
 # Café Operations Agent — Implementation Plan
 
 Date: 2026-11-21
-Status: First implementation in this repository. The synthetic scenario exercises the full workflow. See [README.md](README.md) for setup and [agent.md](agent.md) for runtime behavior and the proposed Carbon closing review.
+Status: First implementation in this repository. The synthetic scenario exercises the full workflow. See [README.md](queue-monitor.md) for setup and [agent.md](../agent.md) for runtime behavior and the proposed Carbon closing review.
 First release: A runnable local application with real Gemini inference, video evidence, staff tasks, and a separate evaluator.
 
 ## 1. Product goal
@@ -32,7 +32,7 @@ Deferred: model training, all-four-model orchestration, individual wait times, t
 
 Known from the current project context and cited documentation:
 
-- The user reports Gemini Tier 3 access to the four event models. The [two-request smoke test](docs/evaluation.md#verified-results) verified Hydrogen access using the configured GitHub Actions secret.
+- The user reports Gemini Tier 3 access to the four event models. The [two-request smoke test](evaluation.md#verified-results) verified Hydrogen access using the configured GitHub Actions secret.
 - Hydrogen supports video input, structured output, and function calling. Its Live API is unsupported; periodic inference requests are the initial design.
 - Tier 3 does not guarantee capacity or eliminate throttling.
 - Café provides six-second clips, actor tracklets, group membership, and group activity annotations.
@@ -83,7 +83,7 @@ Reference annotations have no path into runtime prompts, investigation tools, or
 | Configuration | Backend environment variables and a checked-in example without credentials |
 | Packaging | Reproducible dependency versions, documented local startup, and a container option after the core path works |
 
-See [docs/decisions.md](docs/decisions.md) for implementation choices and [docs/evaluation.md](docs/evaluation.md) for verification status.
+See [docs/decisions.md](decisions.md) for implementation choices and [docs/evaluation.md](evaluation.md) for verification status.
 
 ## 5. Input and time handling
 

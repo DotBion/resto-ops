@@ -1,85 +1,87 @@
-# Café Ops
+# Restaurant Ops Copilot
 
-Café Ops monitors a video feed for customers waiting to order. It checks additional frames when a queue may need staff attention, and records the resulting task with links to the underlying evidence.
+One app for the two things that wreck a restaurant shift: **a line nobody is handling** and **equipment that breaks mid-service**.
 
-The dashboard includes a 32-second synthetic replay with authored observations. It runs without credentials and shows a false alert being held, a sustained queue creating a task, and the task resolving when the line clears.
+- **Queue Monitor**: watches a camera feed or uploaded footage for customers waiting to order, double-checks ambiguous moments with extra frames, and raises a staff task (with evidence frames) only when the queue persists. Built on `gemini-4-hydrogen`.
+- **Fix-It**: film anything broken on your phone. `gemini-4-hydrogen` names the exact part and its specs, **Shop MCP** searches the live catalog by words and by keyframe photo, the **Gemini Decisions API** (`gemini-decision-1`) scores fit per offer, Gemini ranks the top 3, and **Buy now** opens a real merchant checkout (guest checkout available).
+- **One timeline**: queue tasks/decisions and Fix-It scans, fit results, checkouts and buy clicks are written to one SQLite journal (`/api/timeline`, **Ops timeline** tab). That trace is what the planned Gemini 4 **Carbon closing review** reads at night (see [PLAN.md](PLAN.md), stretch, not implemented).
 
-## Run locally
+Built at the Gemini 4 NYC Hackathon (Cerebral Valley x Google DeepMind), Nov 21 2026.
 
-Install Python 3.11+, Node.js 22+ (22.12 or newer), and FFmpeg with `ffprobe` and the `libx264` encoder.
+## Run
 
-```sh
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-npm --prefix frontend ci
-npm --prefix frontend run build
-python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
-```
-
-Open [the local dashboard](http://127.0.0.1:8000) and select **Play the synthetic demo**. To compare strategies on the same replay, switch **Strategy** to **Single observation baseline** and restart playback from the beginning. **Run history** opens saved tasks and evidence.
-
-For frontend development, run the backend on port 8000 and start `npm --prefix frontend run dev`.
-
-## Run Gemini analysis
-
-Set `GEMINI_API_KEY` in the server environment or in a local `.env` based on `.env.example`, then restart the backend. The default observer and verifier are `gemini-4-hydrogen`. Each can be set independently. Only the backend calls Google.
-
-Choose **Gemini** for the synthetic video, upload an MP4 or WebM, or select **Webcam**. Start analysis to send sampled frames to Gemini. Test with footage you are permitted to process. Webcam capture requires browser permission and starts only after you select it. Webcam evidence opens the sampled still. Replay evidence opens the sampled still and moves the video playhead to that position.
-
-The app defaults to 30 Gemini request attempts per run and 100 per server process, including retries. Sessions use a two-second minimum cadence and a 20-second maximum observation lag by default. These settings are configurable in `.env.example`. Requests may take longer than the cadence. The dashboard shows observation age. Responses beyond the lag limit cannot create, update, or resolve tasks.
-
-For a bounded API check, run:
+Needs Python 3.11+, Node.js 22+, and FFmpeg (`ffprobe`, `libx264`).
 
 ```sh
-python -m eval.pilot --output eval/results/pilot.json
+cp .env.example .env        # set GEMINI_API_KEY (never commit .env)
+./run.sh                    # venv + deps + dashboard build + server on http://localhost:8100
 ```
 
-The same command runs on GitHub under **Actions → Gemini smoke test → Run workflow** with the repository secret `GEMINI_API_KEY`. It makes at most two request attempts using the bundled synthetic scene and stores the report as a workflow artifact. The automated build checks use the authored demo and require no key. [See the recorded smoke test and its limits](docs/evaluation.md#verified-results).
-
-## Evaluate footage
+Or by hand:
 
 ```sh
-python -m eval.benchmark --fixture --output /tmp/cafe-evaluation.json
-python -m unittest discover -v
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+npm --prefix frontend ci && npm --prefix frontend run build
+python -m uvicorn backend.app.main:app --host 0.0.0.0 --port 8100
 ```
 
-The [bundled report](eval/fixture-report.json) uses 16 samples from one authored scene. It exercises behavior and metric calculations. Gemini quality on actual café footage requires a separate run.
+| URL | What |
+|---|---|
+| `/` | React dashboard: **Queue Monitor**, **Fix-It**, **Ops timeline**, Evaluation, Run history |
+| `/fixit/` | Fix-It phone page (open on a phone or through a tunnel; also embedded in the Fix-It tab) |
+| `/api/health` | Combined health (both modules' models, key present) |
+| `/api/fixit/health`, `/api/fixit/analyze`, `/api/fixit/checkout`, `/api/fixit/buy-click` | Fix-It API |
+| `/api/config`, `/api/sources`, `/api/runs`, ... | Queue Monitor API (unchanged) |
+| `/api/timeline` | Shared journal timeline (queue + Fix-It) |
 
-Use the [Café project distribution](https://dk-kim.github.io/CAFE/) to obtain selected clip folders and review its dataset terms. The distribution is a large archive. The example command retrieves one paired clip using about 13 MiB of byte ranges.
+The synthetic queue replay (**Play the synthetic demo**) runs without a key. Fix-It needs `GEMINI_API_KEY`.
+
+For a phone demo over a tunnel: `cloudflared tunnel --url http://localhost:8100 --protocol http2`, then open `https://<name>.trycloudflare.com/fixit/` (`*.trycloudflare.com` is allowed by `ALLOWED_HOSTS`). The tunnel runs on your Gemini key, so don't share it widely.
+
+## Buying (Shopify / Shop MCP)
+
+- Primary: **Buy now** opens a sheet with the product, then **Checkout** opens the offer's `checkout_url` exactly as Shop MCP returned it (merchant checkout, guest option).
+- Fallback: "or checkout with Shop" calls `create_checkout` (one merchant per checkout) and opens `continue_url` exactly as returned.
+- The app **never calls `complete_checkout`**; the shopper reviews and pays on the merchant page. Live data only: no caching of results, no re-hosting of images.
+
+## Test
 
 ```sh
-python -m eval.fetch_example eval/local/paired/8/380
-python -m eval.import_cafe eval/local/paired/8/380 \
-  --fps 30 --cafe source-8 --view unknown --recording-group cafe-source-8 \
-  --split development --manifest eval/local/cafe-example.json
+python -m unittest discover -v                          # queue monitor suite + Fix-It integration tests
+python -m eval.benchmark --fixture --output /tmp/r.json && diff eval/fixture-report.json /tmp/r.json
+cd fixit && python scripts/smoke_test.py eval/samples/aerator_messy.mp4   # live Fix-It end-to-end (creates, never completes, a checkout)
+cd fixit && python eval/eval.py --clips eval/samples      # Fix-It sample-clip eval vs single-frame baseline
 ```
 
-For a reviewed set of other clips, import each selected folder as follows.
+## Layout
 
-```sh
-python -m eval.import_cafe /path/to/local/video_id/clip_id \
-  --fps 30 --cafe place-a --view camera-1 --recording-group original-recording-01 \
-  --split held_out --manifest eval/local/cafe-manifest.json
+```
+backend/app/        FastAPI app (base: cafe-ops-agent). main.py mounts Fix-It at /api/fixit and /fixit/
+  journal.py        SQLite journal; ops_log table + timeline() added for Fix-It events
+fixit/              Fix-It Cam (subtree of DotBion/fixitcam, history preserved)
+  app/              server.py (APIRouter + event sink), pipeline.py, gemini.py, shop_mcp.py
+  static/           phone page (index.html, upload.js, eval_upload.html)
+  eval/, scripts/   Fix-It eval clips, results, smoke test
+frontend/           React + Vite dashboard (Queue Monitor, Fix-It, Ops timeline tabs)
+demo/, eval/, tests/  Queue Monitor synthetic replay, benchmark, tests (+ tests/test_fixit_integration.py)
+docs/               Queue Monitor docs (queue-monitor.md, queue-monitor-plan.md, evaluation, decisions, issues)
 ```
 
-Use your recording's actual FPS. The importer reads `ann.json` and `images/frames_<number>.jpg`, creates a replay MP4 beside the manifest, and maps the annotated key frame onto the analysis clock. It imports boxes and social groups. Review `queue_count` and each person's `membership` by watching the clip before scoring operational queue metrics. Mark ambiguous customers as `uncertain`. Give overlapping clips and synchronized views the same recording group. Label alert windows on continuous footage for delay measurements. See [evaluation details](docs/evaluation.md).
+## Results
 
-```sh
-python -m eval.benchmark --manifest eval/local/cafe-manifest.json \
-  --gemini --split held_out --output .cafe-ops/evaluation.json
-```
+- **Fix-It** (17 public clips: 8 synthetic, 5 real household, 4 restaurant photo-pans): full video pipeline 13/17 keyword@3 (76%), 11/17 judge@3 (65%), median 21.1 s; single-frame baseline 11/17 (65%) and 7/17 (41%), 3.6 s. Details and failures: [fixit/README.md](fixit/README.md).
+- **Queue Monitor**: agent vs single-observation baseline on the synthetic fixture: [eval/fixture-report.json](eval/fixture-report.json), [docs/evaluation.md](docs/evaluation.md).
 
-**Evaluation** reads `evaluation.json` from the runtime directory when present. Keep uploaded footage, annotations, and reports containing nonpublic observations on the local machine. The runtime directory defaults to `.cafe-ops/` and holds videos, sampled frames, and the SQLite journal.
+## Docs
 
-## Project documentation
+- [PLAN.md](PLAN.md): goals, themes, milestones, combined Carbon closing review (stretch)
+- [ARCHITECTURE.md](ARCHITECTURE.md): components, request flows, shared journal, deployment, security
+- Module detail: [docs/queue-monitor.md](docs/queue-monitor.md), [agent.md](agent.md), [docs/queue-monitor-plan.md](docs/queue-monitor-plan.md), [fixit/README.md](fixit/README.md), [fixit/PLAN.md](fixit/PLAN.md), [fixit/ARCHITECTURE.md](fixit/ARCHITECTURE.md)
 
-| Document | Contents |
-| --- | --- |
-| [Implementation plan](plan.md) | Scope, architecture, milestones, and current status |
-| [Agent design](agent.md) | Live agent behavior, model settings, and the proposed Carbon closing review |
-| [Contributor guidance](AGENTS.md) | Repository entry points, checks, and documentation conventions |
-| [Evaluation](docs/evaluation.md) | Scoring protocol, evidence, and verified results |
-| [Decision log](docs/decisions.md) | Design choices and tradeoffs |
-| [Issue log](docs/issues.md) | Observed failures and fixes |
-| [Demo script](docs/demo.md) | One-minute walkthrough |
+## Credits
+
+This repo merges two projects by [DotBion](https://github.com/DotBion):
+
+- [DotBion/cafe-ops-agent](https://github.com/DotBion/cafe-ops-agent): Café Ops queue monitor (backend, dashboard, eval, tests). Imported as a snapshot of `main` in the first commit (its git history lives in the original repo).
+- [DotBion/fixitcam](https://github.com/DotBion/fixitcam): Fix-It Cam. Merged under `fixit/` with full git history (subtree merge).

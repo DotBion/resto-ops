@@ -1,6 +1,6 @@
 # Working on Café Ops
 
-Start with the [README](README.md) for setup, [plan.md](plan.md) for scope and milestones, and [agent.md](agent.md) for the current agent behavior and the closing shift proposal.
+Start with the [README](README.md) for setup, [PLAN.md](PLAN.md) for scope and milestones (queue-monitor detail in [docs/queue-monitor-plan.md](docs/queue-monitor-plan.md)), and [agent.md](agent.md) for the current agent behavior and the closing shift proposal.
 
 - The FastAPI entry point is [backend/app/main.py](backend/app/main.py). The React dashboard starts in [frontend/src/main.tsx](frontend/src/main.tsx).
 - Keep observations and decisions tied to source time. Use frames available at the playback watermark and preserve run boundaries when the source or playhead changes.

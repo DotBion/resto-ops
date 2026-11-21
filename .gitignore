@@ -11,3 +11,6 @@ dist/
 *.sqlite*
 eval/local/
 eval/results/
+fixit/eval/clips/*
+!fixit/eval/clips/.gitkeep
+uploads/

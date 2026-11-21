@@ -1,7 +1,10 @@
+# Union of DotBion/cafe-ops-agent (pinned) and DotBion/fixitcam requirements.
 fastapi==0.141.1
-uvicorn==0.52.1
+uvicorn[standard]==0.52.1
 pydantic==2.13.4
 httpx[socks]==0.28.1
 python-multipart==0.0.32
 python-dotenv==1.2.2
 Pillow==13.0.0
+# Fix-It Cam: Gemini 4 (Files API for video) + Decisions API. Tested with 3.6.1.
+google-genai>=3.6.1

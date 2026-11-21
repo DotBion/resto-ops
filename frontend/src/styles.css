@@ -451,3 +451,16 @@
     .select-control select { max-width: 160px; }
   }
 }
+
+/* ---- Restaurant Ops: Fix-It tab + shared timeline ---- */
+.fixit-pane { max-width: 1180px; margin: 0 auto; padding: 18px 24px 24px; }
+.fixit-bar { display: flex; gap: 16px; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 12px; font-size: 14px; opacity: .85; }
+.fixit-bar a { display: inline-flex; gap: 6px; align-items: center; color: inherit; font-weight: 600; }
+.fixit-frame { width: 100%; height: calc(100vh - 150px); min-height: 640px; border: 1px solid rgba(127,127,127,.3); border-radius: 14px; background: #fff; }
+.timeline-pane { max-width: 980px; margin: 0 auto; padding: 24px; }
+.timeline-pane .muted { opacity: .7; }
+.ops-list { list-style: none; padding: 0; margin: 16px 0; display: grid; gap: 8px; }
+.ops-list li { display: grid; grid-template-columns: 96px 70px 1fr; gap: 12px; align-items: baseline; padding: 10px 12px; border: 1px solid rgba(127,127,127,.25); border-radius: 10px; font-size: 14px; }
+.ops-tag { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+.ops-tag.fixit { color: #c2410c; }
+.ops-tag.queue { color: #0f766e; }
