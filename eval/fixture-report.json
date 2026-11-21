@@ -15,20 +15,20 @@
       "policy": {
         "threshold": 4,
         "persistence_ms": 2000,
-        "max_gap_ms": 20000,
+        "max_gap_ms": 30000,
         "cooldown_ms": 5000,
         "update_interval_ms": 5000
       },
       "observer": "authored fixture",
       "verifier": "authored fixture",
       "schema": "1",
-      "prompt": "cafe-observation-v3",
+      "prompt": "service-line-observation-v4",
       "window_ms": 5000,
-      "cadence_ms": 2000,
-      "max_lag_ms": 20000,
+      "cadence_ms": 6000,
+      "max_lag_ms": 30000,
       "thinking_level": "LOW",
       "max_calls": 30,
-      "id": "12ac85cf61e3"
+      "id": "dd06de6a31ec"
     },
     "agent": {
       "provider": "fixture",
@@ -36,20 +36,20 @@
       "policy": {
         "threshold": 4,
         "persistence_ms": 2000,
-        "max_gap_ms": 20000,
+        "max_gap_ms": 30000,
         "cooldown_ms": 5000,
         "update_interval_ms": 5000
       },
       "observer": "authored fixture",
       "verifier": "authored fixture",
       "schema": "1",
-      "prompt": "cafe-observation-v3",
+      "prompt": "service-line-observation-v4",
       "window_ms": 5000,
-      "cadence_ms": 2000,
-      "max_lag_ms": 20000,
+      "cadence_ms": 6000,
+      "max_lag_ms": 30000,
       "thinking_level": "LOW",
       "max_calls": 30,
-      "id": "a0cf4e043903"
+      "id": "f4ec38463432"
     }
   },
   "media_checksums": {

@@ -64,10 +64,18 @@ Unchanged from cafe-ops-agent; see [agent.md](agent.md) and [docs/queue-monitor.
 
 | Use | Model | Setting |
 |---|---|---|
-| Queue observer / verifier | `gemini-4-hydrogen` (LOW thinking) | `CAFE_OBSERVER_MODEL`, `CAFE_VERIFIER_MODEL`, `CAFE_THINKING_LEVEL` |
-| Fix-It diagnose / rank | `gemini-4-hydrogen` | `IDENTIFY_MODEL`, `RANK_MODEL`, `DIAGNOSE_THINKING`, `RANK_THINKING` |
+| Queue observer (every window, every 6 s) | `gemini-4-hydrogen`, thinking LOW | `CAFE_OBSERVER_MODEL`, `CAFE_THINKING_LEVEL` |
+| Queue verifier (independent re-check before a task is raised or resolved) | `gemini-4-argon`, thinking LOW | `CAFE_VERIFIER_MODEL` |
+| Fix-It diagnose | `gemini-4-hydrogen` | `IDENTIFY_MODEL`, `DIAGNOSE_THINKING` |
 | Fix-It fit gate | `gemini-decision-1` (Decisions API) | `DECISION_MODEL` |
+| Fix-It rank top 3 | `gemini-4-argon`, thinking low | `RANK_MODEL`, `RANK_THINKING` |
 | Closing review (stretch) | `gemini-4-carbon` | not implemented |
+
+### Queue policy on real footage
+
+- **Prompt** (`service-line-observation-v4`): any line of people waiting for service counts (ordering counter, buffet or food table, pickup counter, drink station, register, registration desk). Seated people, staff, the person being served, passers-by and people standing apart talking or eating are excluded.
+- **Cadence:** 6 s between windows (`CAFE_CADENCE_MS`); the maximum observation lag is 30 s (`CAFE_MAX_OBSERVATION_LAG_MS`), so an observe plus review round trip (about 15-20 s on Gemini 4) finishes before the replay moves past it.
+- **Ranges:** a crowded line comes back as a range with `uncertain` visibility. A task can be raised when the range's lower bound meets the threshold *and* the verifier's independent review agreed, after the usual persistence window. Resolution mirrors this with the upper bound. Unverified ranges and the single-observation baseline still require an exact clear count.
 
 ## Deployment
 

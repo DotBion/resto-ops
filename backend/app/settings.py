@@ -27,14 +27,14 @@ class Settings:
     home: Path = ROOT / ".cafe-ops"
     api_key: str = field(default="", repr=False)
     observer: str = "gemini-4-hydrogen"
-    verifier: str = "gemini-4-hydrogen"
+    verifier: str = "gemini-4-argon"
     thinking_level: str = "LOW"
     timeout: int = 20
     max_calls_run: int = 30
     max_calls_process: int = 100
     window_ms: int = 5000
-    cadence_ms: int = 2000
-    max_lag_ms: int = 20000
+    cadence_ms: int = 6000
+    max_lag_ms: int = 30000
     queue_threshold: int = 4
     persistence_ms: int = 2000
     # Host header allow-list. Defaults cover local use plus a cloudflared quick tunnel.
@@ -51,14 +51,14 @@ class Settings:
             home=Path(os.getenv("CAFE_HOME", str(ROOT / ".cafe-ops"))).expanduser().resolve(),
             api_key=os.getenv("GEMINI_API_KEY", "").strip(),
             observer=observer,
-            verifier=model_id("CAFE_VERIFIER_MODEL", observer),
+            verifier=model_id("CAFE_VERIFIER_MODEL", "gemini-4-argon"),
             thinking_level=level,
             timeout=integer("CAFE_GEMINI_TIMEOUT_SECONDS", 20, 3, 90),
             max_calls_run=integer("CAFE_MAX_CALLS_PER_RUN", 30, 1, 500),
             max_calls_process=integer("CAFE_MAX_CALLS_PER_PROCESS", 100, 1, 5000),
             window_ms=integer("CAFE_WINDOW_MS", 5000, 2000, 12000),
-            cadence_ms=integer("CAFE_CADENCE_MS", 2000, 750, 10000),
-            max_lag_ms=integer("CAFE_MAX_OBSERVATION_LAG_MS", 20000, 1000, 30000),
+            cadence_ms=integer("CAFE_CADENCE_MS", 6000, 750, 10000),
+            max_lag_ms=integer("CAFE_MAX_OBSERVATION_LAG_MS", 30000, 1000, 60000),
             queue_threshold=integer("CAFE_QUEUE_THRESHOLD", 4, 2, 30),
             persistence_ms=integer("CAFE_PERSISTENCE_MS", 2000, 500, 20000),
             allowed_hosts=[h.strip() for h in os.getenv(

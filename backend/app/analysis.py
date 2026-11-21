@@ -43,18 +43,21 @@ def run_configuration(settings: Settings, provider: str, strategy: str, threshol
     return {**data, "id": fingerprint}
 
 
-def is_high(scene: Scene, threshold: int) -> bool:
-    return (
-        scene.visibility == "clear" and scene.queue_min is not None
-        and scene.queue_min >= threshold
-    )
+def is_high(scene: Scene, threshold: int, verified: bool = False) -> bool:
+    # An exact clear count, or a verified range whose LOWER bound already meets the threshold.
+    # Crowded real footage (buffet lines, long lines running out of frame) almost always comes
+    # back as a range with "uncertain" visibility; if even the minimum is over the threshold and
+    # an independent review agreed, the queue is high regardless of the exact count.
+    if scene.queue_min is None:
+        return False
+    return scene.queue_min >= threshold and (scene.visibility == "clear" or verified)
 
 
-def is_clear(scene: Scene, threshold: int) -> bool:
-    return (
-        scene.visibility == "clear" and scene.queue_max is not None
-        and scene.queue_max <= threshold
-    )
+def is_clear(scene: Scene, threshold: int, verified: bool = False) -> bool:
+    # Mirror of is_high: an exact clear count, or a verified range whose UPPER bound is at or below it.
+    if scene.queue_max is None:
+        return False
+    return scene.queue_max <= threshold and (scene.visibility == "clear" or verified)
 
 
 @dataclass
@@ -87,8 +90,8 @@ class TaskState:
         policy = self.policy
         usable = bool(evidence) and max(evidence) >= at_ms - 500
         independently_sampled = verified and len(set(evidence)) >= 2
-        high = usable and is_high(scene, policy.threshold)
-        clear = usable and is_clear(scene, policy.clear_threshold)
+        high = usable and is_high(scene, policy.threshold, verified)
+        clear = usable and is_clear(scene, policy.clear_threshold, verified)
         high_span = self.high.update(high, at_ms, policy.max_gap_ms)
         clear_span = self.clear.update(clear, at_ms, policy.max_gap_ms)
         meta = dict(
@@ -222,7 +225,7 @@ class Analysis:
                 (self.tasks.active is None and (
                     (scene.queue_max is not None and scene.queue_max >= self.policy.threshold)
                     or (scene.queue_max is None and scene.inspection is not None)
-                )) or (self.tasks.active is not None and is_clear(scene, self.policy.clear_threshold))
+                )) or (self.tasks.active is not None and is_clear(scene, self.policy.clear_threshold, verified=True))
             )
         )
         if expects_review:
@@ -252,9 +255,9 @@ class Analysis:
         if expects_review:
             if task:
                 outcome = task["action"]
-            elif not verified or scene.visibility == "uncertain" or not evidence:
+            elif not verified or scene.queue_min is None or not evidence:
                 outcome = "insufficient_evidence"
-            elif is_high(scene, self.policy.threshold):
+            elif is_high(scene, self.policy.threshold, verified):
                 outcome = "awaiting_persistence"
             else:
                 outcome = "hold" if not self.tasks.active else "monitor"

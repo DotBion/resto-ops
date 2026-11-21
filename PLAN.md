@@ -27,6 +27,8 @@ Hackathon: Gemini 4 NYC (Cerebral Valley x Google DeepMind), Sat Nov 21 2026. Su
 | 7 | Real restaurant clips for both modules; rerun evals; update numbers | Pending (needs filming) |
 | 8 | 1-minute video; repo public; submit by ~4:45 PM ET | Pending |
 | 9 | **Carbon closing review** (below) | Stretch, **not implemented** |
+| 10 | Real-footage queue fixes: service-line prompt (buffet/pickup/registration lines), 6 s cadence, 30 s lag, verified ranges can raise tasks; Argon as verifier and Fix-It ranker | Done |
+| 11 | **Local person detector + tracker for live boxes** (below) | Next step, **not built** |
 
 ## Stretch: Carbon closing review (not implemented)
 
@@ -56,6 +58,15 @@ Hackathon: Gemini 4 NYC (Cerebral Valley x Google DeepMind), Sat Nov 21 2026. Su
 **Cross-module question:** 12. Did any breakdown coincide with a queue buildup (for example the espresso machine down at the morning rush), and what would have prevented it?
 
 **Scope today:** build only if the demo and video are done by ~4 PM ET (one "closing report" screen over today's journal). Otherwise it is the next step in the pitch.
+
+## Next step: local detector + tracker, Gemini for reasoning (not built)
+
+Gemini 4 calls take about 4-15 s, so the live view only refreshes every few seconds. The next step splits the work:
+
+- **On-device, every frame (about 30 fps):** a YOLO-style person detector (e.g. YOLO11n or RT-DETR, exported to ONNX or CoreML) plus a tracker (ByteTrack or BoT-SORT). This draws live boxes with stable IDs, per-person dwell time, a line-zone count over time, and arrival/service rates. No API cost, no lag.
+- **Gemini 4, every few seconds or on a trigger:** send the tracker's numbers (count series, dwell times, track IDs inside the line zone) plus 3-6 key frames. Hydrogen confirms who is actually queueing versus standing nearby or seated; Argon re-checks before a staff task; Carbon reads the day's track log at close.
+- **Why both:** the detector is fast but cannot tell a line from a crowd or know what the people are waiting for; Gemini can, but is too slow and costly for every frame. Counts from the tracker also make evaluation exact (per-frame count error against labels).
+- **Scope:** about half a day: a `detector/` worker that writes track events to the same journal, a line-zone editor in the viewer, and a prompt that takes the counts as evidence.
 
 ## Risks
 

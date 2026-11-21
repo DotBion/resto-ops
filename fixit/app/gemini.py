@@ -10,7 +10,7 @@ from google import genai
 from google.genai import types
 
 IDENTIFY_MODEL = os.getenv("IDENTIFY_MODEL", "gemini-4-hydrogen")
-RANK_MODEL = os.getenv("RANK_MODEL", "gemini-4-hydrogen")
+RANK_MODEL = os.getenv("RANK_MODEL", "gemini-4-argon")  # reasoning: compare offers vs. specs
 DECISION_MODEL = os.getenv("DECISION_MODEL", "gemini-decision-1")
 DIAGNOSE_THINKING = os.getenv("DIAGNOSE_THINKING", "")  # "", "low", "high"
 RANK_THINKING = os.getenv("RANK_THINKING", "low")

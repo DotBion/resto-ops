@@ -1,12 +1,27 @@
 # Restaurant Ops Copilot
 
-One app for the two things that wreck a restaurant shift: **a line nobody is handling** and **equipment that breaks mid-service**.
+**Point a camera at the floor, or film something broken, and Gemini 4 handles it.** The input is always camera footage: a live camera, an uploaded clip, or a phone video. Gemini 4 reasons over the frames and decides what to do.
 
-- **Queue Monitor**: watches a camera feed or uploaded footage for customers waiting to order, double-checks ambiguous moments with extra frames, and raises a staff task (with evidence frames) only when the queue persists. Built on `gemini-4-hydrogen`.
-- **Fix-It**: film anything broken on your phone. `gemini-4-hydrogen` names the exact part and its specs, **Shop MCP** searches the live catalog by words and by keyframe photo, the **Gemini Decisions API** (`gemini-decision-1`) scores fit per offer, Gemini ranks the top 3, and **Buy now** opens a real merchant checkout (guest checkout available).
-- **One timeline**: queue tasks/decisions and Fix-It scans, fit results, checkouts and buy clicks are written to one SQLite journal (`/api/timeline`, **Ops timeline** tab). That trace is what the planned Gemini 4 **Carbon closing review** reads at night (see [PLAN.md](PLAN.md), stretch, not implemented).
+- **Queue watch (camera to staff task):** watches footage of the floor for lines of people waiting for service, at an ordering counter, buffet or food table, pickup counter or registration desk. A fast Gemini 4 model looks at every window of frames. When a line looks long, a stronger Gemini 4 model re-checks extra frames on its own, and a staff task with the evidence frames is raised only if the line persists. Seated people are not counted.
+- **Fix-It (phone video to the right part to a real checkout):** film anything broken. Gemini 4 names the exact part and its specs from the video, **Shop MCP** searches the live catalog by words and by a keyframe photo, the **Gemini Decisions API** scores each offer's fit, a reasoning model ranks the top 3, and **Buy now** opens a real merchant checkout (guest checkout available).
+- **One trace:** every observation, review, task, scan, fit score and checkout goes into one SQLite journal (`/api/timeline`). That trace is what the planned **Carbon closing review** reads after close (see [PLAN.md](PLAN.md); stretch, not implemented).
+
+The web dashboard is just the viewer for those streams: video with live boxes, evidence frames and the timeline.
 
 Built at the Gemini 4 NYC Hackathon (Cerebral Valley x Google DeepMind), Nov 21 2026.
+
+## Which model does what
+
+| Job | Model | Why this model | Setting |
+|---|---|---|---|
+| Queue: look at every window of frames (count the line, people boxes, groups) | `gemini-4-hydrogen` (thinking LOW) | Fastest Gemini 4; runs every 6 s on live or replayed video | `CAFE_OBSERVER_MODEL` |
+| Queue: independent re-check before a staff task is raised or resolved | `gemini-4-argon` (thinking LOW) | Stronger reasoning, used only on the few windows that might trigger an alert | `CAFE_VERIFIER_MODEL` |
+| Fix-It: diagnose the broken part and specs from the video | `gemini-4-hydrogen` | Fast video understanding for a live phone flow | `IDENTIFY_MODEL` |
+| Fix-It: per-offer fit check (yes/no with a score) | `gemini-decision-1` (Decisions API) | Built for scored decisions over many candidates | `DECISION_MODEL` |
+| Fix-It: rank the top 3 against the diagnosed specs | `gemini-4-argon` (thinking LOW) | Compares specs, compatibility and price across offers | `RANK_MODEL`, `RANK_THINKING` |
+| Closing review after close (stretch, not built) | `gemini-4-carbon` | Deepest reasoning over a full day's trace | n/a |
+
+`LOW` is the lowest thinking level Gemini 4 accepts (`MINIMAL` is rejected). Leaving it unset is much slower: about 17 s vs 4 s per call in our test.
 
 ## Run
 
@@ -28,7 +43,7 @@ python -m uvicorn backend.app.main:app --host 0.0.0.0 --port 8100
 
 | URL | What |
 |---|---|
-| `/` | React dashboard: **Queue Monitor**, **Fix-It**, **Ops timeline**, Evaluation, Run history |
+| `/` | Viewer: **Queue Monitor** (video + live boxes + evidence), **Fix-It**, **Ops timeline**, Evaluation, Run history |
 | `/fixit/` | Fix-It phone page (open on a phone or through a tunnel; also embedded in the Fix-It tab) |
 | `/api/health` | Combined health (both modules' models, key present) |
 | `/api/fixit/health`, `/api/fixit/analyze`, `/api/fixit/checkout`, `/api/fixit/buy-click` | Fix-It API |
