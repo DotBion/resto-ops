@@ -1,0 +1,168 @@
+{
+  "dataset": "Counter & seating synthetic scenario",
+  "version": "fixture-v1",
+  "annotation_version": "simulation-v1",
+  "split": "held_out",
+  "provider": "fixture",
+  "synthetic": true,
+  "source_url": "repo:demo/counter.mp4",
+  "reused_observations": 16,
+  "actual_remote_attempts": 0,
+  "configurations": {
+    "baseline": {
+      "provider": "fixture",
+      "strategy": "baseline",
+      "policy": {
+        "threshold": 4,
+        "persistence_ms": 2000,
+        "max_gap_ms": 20000,
+        "cooldown_ms": 5000,
+        "update_interval_ms": 5000
+      },
+      "observer": "authored fixture",
+      "verifier": "authored fixture",
+      "schema": "1",
+      "prompt": "cafe-observation-v3",
+      "window_ms": 5000,
+      "cadence_ms": 2000,
+      "max_lag_ms": 20000,
+      "thinking_level": "LOW",
+      "max_calls": 30,
+      "id": "12ac85cf61e3"
+    },
+    "agent": {
+      "provider": "fixture",
+      "strategy": "agent",
+      "policy": {
+        "threshold": 4,
+        "persistence_ms": 2000,
+        "max_gap_ms": 20000,
+        "cooldown_ms": 5000,
+        "update_interval_ms": 5000
+      },
+      "observer": "authored fixture",
+      "verifier": "authored fixture",
+      "schema": "1",
+      "prompt": "cafe-observation-v3",
+      "window_ms": 5000,
+      "cadence_ms": 2000,
+      "max_lag_ms": 20000,
+      "thinking_level": "LOW",
+      "max_calls": 30,
+      "id": "a0cf4e043903"
+    }
+  },
+  "media_checksums": {
+    "counter-demo": "7d552b3431c6f07067c31d12bf737ed0b74aed65d928488b0e5cd1d8aca0b8eb"
+  },
+  "comparison": {
+    "baseline": {
+      "clips": 1,
+      "windows": 16,
+      "queue_count_mae": 0.375,
+      "exact_scored": 16,
+      "queue_labeled": 16,
+      "prediction_coverage": 1.0,
+      "interval_coverage": 0.8125,
+      "queue_membership_f1": 0.9362,
+      "group_pair_f1": 1.0,
+      "actor_recall": 1.0,
+      "actor_precision": 1.0,
+      "alert_precision": 0.0,
+      "alert_recall": 0.0,
+      "false_alerts": 1,
+      "duplicate_alerts": 0,
+      "false_alerts_per_min": 1.8751,
+      "mean_detection_delay_ms": null,
+      "request_p50_ms": null,
+      "request_p95_ms": null,
+      "api_calls": 0,
+      "sampled_images": 91,
+      "tokens": {},
+      "errors": {},
+      "activity_confusion": [
+        {
+          "reference": "eating",
+          "prediction": "eating",
+          "count": 16
+        },
+        {
+          "reference": "queueing",
+          "prediction": "queueing",
+          "count": 12
+        },
+        {
+          "reference": "unknown",
+          "prediction": "unknown",
+          "count": 3
+        }
+      ],
+      "errors_to_review": [
+        {
+          "clip": "counter-demo",
+          "at_ms": 6000,
+          "expected": 2,
+          "predicted": 4,
+          "note": "People near the counter appear to be in the same line."
+        },
+        {
+          "clip": "counter-demo",
+          "at_ms": 8000,
+          "expected": 2,
+          "predicted": 4,
+          "note": "People near the counter appear to be in the same line."
+        },
+        {
+          "clip": "counter-demo",
+          "at_ms": 10000,
+          "expected": 2,
+          "predicted": 4,
+          "note": "People near the counter appear to be in the same line."
+        }
+      ]
+    },
+    "agent": {
+      "clips": 1,
+      "windows": 16,
+      "queue_count_mae": 0,
+      "exact_scored": 16,
+      "queue_labeled": 16,
+      "prediction_coverage": 1.0,
+      "interval_coverage": 1.0,
+      "queue_membership_f1": 1.0,
+      "group_pair_f1": 1.0,
+      "actor_recall": 1.0,
+      "actor_precision": 1.0,
+      "alert_precision": 1.0,
+      "alert_recall": 1.0,
+      "false_alerts": 0,
+      "duplicate_alerts": 0,
+      "false_alerts_per_min": 0.0,
+      "mean_detection_delay_ms": 2000,
+      "request_p50_ms": null,
+      "request_p95_ms": null,
+      "api_calls": 0,
+      "sampled_images": 141,
+      "tokens": {},
+      "errors": {},
+      "activity_confusion": [
+        {
+          "reference": "eating",
+          "prediction": "eating",
+          "count": 16
+        },
+        {
+          "reference": "queueing",
+          "prediction": "queueing",
+          "count": 12
+        },
+        {
+          "reference": "unknown",
+          "prediction": "unknown",
+          "count": 3
+        }
+      ],
+      "errors_to_review": []
+    }
+  }
+}
