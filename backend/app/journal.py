@@ -55,6 +55,13 @@ class Journal:
                 (source.id, source.model_dump_json(), now_ms()),
             )
 
+    def relabel(self, source_id: str, label: str) -> None:
+        source = self.source(source_id)
+        if source and source.label != label:
+            with self.connection() as db:
+                db.execute("UPDATE sources SET metadata=? WHERE id=?",
+                           (source.model_copy(update={"label": label}).model_dump_json(), source_id))
+
     def source(self, source_id: str) -> Source | None:
         with self.connection() as db:
             row = db.execute("SELECT metadata FROM sources WHERE id=?", (source_id,)).fetchone()

@@ -246,7 +246,7 @@ export function Monitor({ monitor: m }: { monitor: MonitorData }) {
                   ))}
                 </div>}
                 <div className="video-caption">
-                  <span>{reviewFrame !== undefined ? "EVIDENCE" : camera ? "CAMERA" : m.source.kind === "synthetic" ? "SYNTHETIC" : "REPLAY"}</span>
+                  <span>{reviewFrame !== undefined ? "EVIDENCE" : camera ? "CAMERA" : m.source.kind === "synthetic" ? "SYNTHETIC" : m.source.kind === "cafe" ? "REAL FOOTAGE" : "REPLAY"}</span>
                   <span>{clock(reviewFrame ?? m.position, true)}</span>
                 </div>
               </div>

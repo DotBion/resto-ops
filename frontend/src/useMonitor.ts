@@ -62,7 +62,10 @@ export function useMonitor() {
       setConfig(settings);
       setSources(list);
       setThreshold(settings.threshold);
-      setSource(list.find((item) => item.id === settings.demo_id) ?? list[0]);
+      const initial = list.find((item) => item.id === settings.demo_id) ?? list[0];
+      setSource(initial);
+      // Real footage has no authored observations: start in Gemini mode unless it is the synthetic fallback.
+      if (initial) setProvider(initial.kind === "synthetic" ? "fixture" : "gemini");
     }).catch((problem: Error) => {
       if (!canceled) setError(problem.message);
     });

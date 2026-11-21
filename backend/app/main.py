@@ -24,7 +24,23 @@ from fixit.app import server as fixit_server
 
 FIXIT_STATIC = ROOT / "fixit" / "static"
 
-DEMO_ID = "counter-demo-v1"
+DEMO_ID = "counter-demo-v1"  # authored synthetic scene: offline fallback only
+DEMO_LABEL = "Offline demo (synthetic)"
+REAL_ID = "cafe-781-counter-v1"  # real café footage fetched by scripts/fetch_real_default.sh
+REAL_LABEL = "Café 781 counter · real footage (Café dataset)"
+REAL_VIDEO = ROOT / "demo" / "real" / "cafe-781-counter.mp4"
+
+
+async def bundled_source(journal: Journal, home: Path, path: Path, source_id: str, label: str, kind: str) -> None:
+    if not path.exists():
+        return
+    if journal.source(source_id):
+        journal.relabel(source_id, label)
+        return
+    dest = home / "media" / source_id
+    if dest.exists():
+        shutil.rmtree(dest)
+    journal.add_source(await asyncio.to_thread(prepare, path, dest, source_id, label, kind))
 
 
 def create_app(settings: Settings | None = None) -> FastAPI:
@@ -35,13 +51,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         settings.home.mkdir(parents=True, exist_ok=True)
         journal = Journal(settings.home / "operations.sqlite3")
         journal.interrupt_runs()
-        demo = ROOT / "demo" / "counter.mp4"
-        if demo.exists() and not journal.source(DEMO_ID):
-            dest = settings.home / "media" / DEMO_ID
-            if dest.exists():
-                shutil.rmtree(dest)
-            source = await asyncio.to_thread(prepare, demo, dest, DEMO_ID, "Counter & seating", "synthetic")
-            journal.add_source(source)
+        await bundled_source(journal, settings.home, ROOT / "demo" / "counter.mp4", DEMO_ID, DEMO_LABEL, "synthetic")
+        await bundled_source(journal, settings.home, REAL_VIDEO, REAL_ID, REAL_LABEL, "cafe")
         app.state.journal = journal
         sink = lambda kind, payload: journal.log("fixit", kind, payload)  # noqa: E731
         fixit_server.EVENT_SINKS.append(sink)
@@ -78,7 +89,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     def config():
         return {
             "gemini_ready": bool(settings.api_key), "observer": settings.observer,
-            "verifier": settings.verifier, "demo_id": DEMO_ID, "threshold": settings.queue_threshold,
+            "verifier": settings.verifier,
+            # Default source: real café footage when it has been fetched, else the synthetic fallback.
+            "demo_id": REAL_ID if app.state.journal.source(REAL_ID) else DEMO_ID, "synthetic_id": DEMO_ID, "threshold": settings.queue_threshold,
             "max_lag_ms": settings.max_lag_ms, "cadence_ms": settings.cadence_ms,
             "max_upload_bytes": MAX_UPLOAD_BYTES, "max_calls": settings.max_calls_run,
         }

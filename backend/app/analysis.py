@@ -28,15 +28,19 @@ class Policy:
         return max(0, self.threshold - 2)
 
 
+FIXTURE_CADENCE_MS = 2000  # authored observations cost no API calls; keep the offline demo responsive
+
+
 def run_configuration(settings: Settings, provider: str, strategy: str, threshold: int | None) -> dict:
+    cadence_ms = FIXTURE_CADENCE_MS if provider == "fixture" else settings.cadence_ms
     policy = Policy(threshold or settings.queue_threshold, settings.persistence_ms,
-                    max(settings.cadence_ms * 3, settings.persistence_ms * 2, settings.max_lag_ms))
+                    max(cadence_ms * 3, settings.persistence_ms * 2, settings.max_lag_ms))
     data = {
         "provider": provider, "strategy": strategy, "policy": asdict(policy),
         "observer": settings.observer if provider == "gemini" else "authored fixture",
         "verifier": settings.verifier if provider == "gemini" else "authored fixture",
         "schema": SCHEMA_VERSION, "prompt": PROMPT_VERSION, "window_ms": settings.window_ms,
-        "cadence_ms": settings.cadence_ms, "max_lag_ms": settings.max_lag_ms,
+        "cadence_ms": cadence_ms, "max_lag_ms": settings.max_lag_ms,
         "thinking_level": settings.thinking_level, "max_calls": settings.max_calls_run,
     }
     fingerprint = hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:12]

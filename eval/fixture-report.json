@@ -24,11 +24,11 @@
       "schema": "1",
       "prompt": "service-line-observation-v4",
       "window_ms": 5000,
-      "cadence_ms": 6000,
+      "cadence_ms": 2000,
       "max_lag_ms": 30000,
       "thinking_level": "LOW",
       "max_calls": 30,
-      "id": "dd06de6a31ec"
+      "id": "c3a91e7ecedd"
     },
     "agent": {
       "provider": "fixture",
@@ -45,11 +45,11 @@
       "schema": "1",
       "prompt": "service-line-observation-v4",
       "window_ms": 5000,
-      "cadence_ms": 6000,
+      "cadence_ms": 2000,
       "max_lag_ms": 30000,
       "thinking_level": "LOW",
       "max_calls": 30,
-      "id": "f4ec38463432"
+      "id": "033da6d71401"
     }
   },
   "media_checksums": {

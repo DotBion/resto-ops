@@ -18,6 +18,8 @@ def smoke():
         page.on("pageerror", lambda error: errors.append(str(error)))
         page.goto(URL)
         expect(page.get_by_role("heading", name="Floor monitor")).to_be_visible()
+        # The default source is real café footage when fetched; the scripted checks use the synthetic fallback.
+        page.get_by_label("Video source").select_option("counter-demo-v1")
         page.get_by_role("button", name="Play the synthetic demo").first.click()
         page.locator("video").evaluate("(video) => video.playbackRate = 1.6")
         expect(page.get_by_text("Alert held", exact=True).first).to_be_visible(timeout=16000)
@@ -32,7 +34,7 @@ def smoke():
         cells = page.get_by_role("row").filter(has_text="False alerts").get_by_role("cell")
         expect(cells).to_have_text(["1", "0"])
         page.get_by_role("button", name="Run history", exact=True).click()
-        page.get_by_role("button").filter(has_text="Counter & seating").first.click()
+        page.get_by_role("button").filter(has_text="Offline demo (synthetic)").first.click()
         expect(page.get_by_text("Task resolved", exact=True)).to_be_visible()
         mobile = browser.new_page(viewport={"width": 380, "height": 844}, is_mobile=True, has_touch=True)
         mobile.goto(URL)

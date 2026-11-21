@@ -50,7 +50,9 @@ python -m uvicorn backend.app.main:app --host 0.0.0.0 --port 8100
 | `/api/config`, `/api/sources`, `/api/runs`, ... | Queue Monitor API (unchanged) |
 | `/api/timeline` | Shared journal timeline (queue + Fix-It) |
 
-The synthetic queue replay (**Play the synthetic demo**) runs without a key. Fix-It needs `GEMINI_API_KEY`.
+**Default footage is real.** `./run.sh` runs `scripts/fetch_real_default.sh` once, which downloads three short clips from the [Café dataset](https://dk-kim.github.io/CAFE/) (Kim et al., ECCV 2024; café 8, clips 187/27/28, people lining up at the counter) by HTTP range (~42 MiB, about a minute) and stitches them into `demo/real/cafe-781-counter.mp4` (git-ignored). The dataset publishes no redistribution license, so the footage is fetched at setup instead of committed. The dashboard opens on that clip ("Café 781 counter · real footage") and runs live Gemini analysis on it. The authored cartoon scene stays available as **Offline demo (synthetic)**, for running without a key or network, and is never the default when real footage is present. You can also upload any MP4/MOV/WebM or use a webcam.
+
+Fix-It needs `GEMINI_API_KEY`.
 
 For a phone demo over a tunnel: `cloudflared tunnel --url http://localhost:8100 --protocol http2`, then open `https://<name>.trycloudflare.com/fixit/` (`*.trycloudflare.com` is allowed by `ALLOWED_HOSTS`). The tunnel runs on your Gemini key, so don't share it widely.
 

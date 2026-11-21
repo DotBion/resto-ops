@@ -13,7 +13,7 @@ from PIL import Image
 from backend.app.analysis import Analysis, run_configuration
 from backend.app.contracts import NewRun, Scene, Source
 from backend.app.journal import Journal
-from backend.app.main import DEMO_ID, create_app
+from backend.app.main import REAL_ID, DEMO_ID, create_app
 from backend.app.media import Frame, VideoFrames
 from backend.app.models import Budget, FixtureVision, GeminiVision, ProviderError, parse_scene
 from backend.app.runs import RunConflict, Runs
@@ -145,7 +145,8 @@ class MediaTests(unittest.TestCase):
             with TestClient(create_app(settings)) as client:
                 config = client.get("/api/config").json()
                 self.assertFalse(config["gemini_ready"])
-                self.assertEqual(config["demo_id"], DEMO_ID)
+                self.assertEqual(config["synthetic_id"], DEMO_ID)
+                self.assertIn(config["demo_id"], {DEMO_ID, REAL_ID})
                 range_response = client.get(f"/api/sources/{DEMO_ID}/video", headers={"Range": "bytes=0-15"})
                 self.assertEqual(range_response.status_code, 206)
                 self.assertEqual(len(range_response.content), 16)

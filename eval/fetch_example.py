@@ -1,4 +1,8 @@
-"""Retrieve the paired Café example (source 8, clip 380) by HTTP range."""
+"""Retrieve selected Café dataset clips (source 8) by HTTP range.
+
+Default: the paired example 8/380. `--clip 8/187` etc. fetch the reviewed "queueing" clips used as the
+dashboard's real default footage (see scripts/fetch_real_default.sh). Each clip is ~13-14 MiB of ranges.
+The dataset is not redistributed in this repository; review its terms at https://dk-kim.github.io/CAFE/."""
 
 import argparse
 import hashlib
@@ -15,10 +19,26 @@ from urllib.request import Request, urlopen
 FILE_ID = "1_JhgdZ6K3ib8xagu6QSL_NKbjIkd-lU6"
 HOST = "drive.usercontent.google.com"
 ARCHIVE_SIZE = 143_206_010_186
-MAX_BYTES = 16 * 1024 * 1024
+MAX_BYTES = 24 * 1024 * 1024
 BLOCK = 2 * 1024 * 1024
+# clip -> (archive members, sha256 of ann.json) for the snapshot these tools were tested against
+CLIPS = {
+    "8/380": (32, "36543445f5c0b4bab67bef7d4890f0e1687242a05b81119903f88b4731051702"),
+    "8/187": (35, "b8366edad3d46385bb30ccfe65d59441d7db62636e8574010e0a7a07767d8cf7"),
+    "8/27": (33, "a5e11788adc421ddb1efb60cc933624ca5bee8c3cadf9aae3789e52bc5f359ff"),
+    "8/28": (35, "f03403f67fd3f2ed4d3740beb48a0f742e17947ff9ae48953fd98a0b59228435"),
+}
 PREFIX = "Cafe_Dataset/Dataset/cafe/8/380/"
-ANNOTATION_HASH = "36543445f5c0b4bab67bef7d4890f0e1687242a05b81119903f88b4731051702"
+ANNOTATION_HASH = CLIPS["8/380"][1]
+EXPECTED_MEMBERS = CLIPS["8/380"][0]
+
+
+def select(clip: str) -> None:
+    global PREFIX, ANNOTATION_HASH, EXPECTED_MEMBERS
+    if clip not in CLIPS:
+        raise ValueError(f"Unknown clip {clip}; choose one of {', '.join(CLIPS)}.")
+    PREFIX = f"Cafe_Dataset/Dataset/cafe/{clip}/"
+    EXPECTED_MEMBERS, ANNOTATION_HASH = CLIPS[clip]
 
 
 class DownloadForm(HTMLParser):
@@ -101,7 +121,7 @@ class Member:
 
 
 def directory(archive: Archive) -> list[Member]:
-    data = archive.read(central_offset(archive), 128 * 1024)
+    data = archive.read(central_offset(archive), 2 * 1024 * 1024)
     position = 0
     members = []
     while position + 46 < len(data):
@@ -112,6 +132,8 @@ def directory(archive: Archive) -> list[Member]:
         crc, compressed, expanded, name_size, extra_size, comment_size = record[7:13]
         offset = record[-1]
         name_at = position + 46
+        if name_at + name_size + extra_size + comment_size > len(data):
+            break
         name = data[name_at:name_at + name_size].decode()
         position = name_at + name_size + extra_size + comment_size
         if name.startswith(PREFIX) and not name.endswith("/"):
@@ -123,7 +145,7 @@ def directory(archive: Archive) -> list[Member]:
             members.append(Member(relative, offset, compressed, expanded, method, crc))
         elif members and not name.startswith(PREFIX):
             break
-    if len(members) != 32:
+    if len(members) != EXPECTED_MEMBERS:
         raise ValueError("The example clip no longer matches the archived snapshot.")
     return members
 
@@ -171,9 +193,12 @@ def fetch(destination: Path) -> int:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("destination", type=Path)
+    parser.add_argument("--clip", default="8/380", help=f"One of: {', '.join(CLIPS)}")
     args = parser.parse_args()
     try:
+        select(args.clip)
         size = fetch(args.destination)
-        print(f"Retrieved 31 frames and ann.json into {args.destination} using {size:,} range bytes.")
+        print(f"Retrieved {EXPECTED_MEMBERS - 1} frames and ann.json for {args.clip} into {args.destination} "
+              f"using {size:,} range bytes.")
     except (OSError, ValueError, struct.error, zlib.error) as error:
         parser.exit(1, f"Sample retrieval stopped: {error}\n")
