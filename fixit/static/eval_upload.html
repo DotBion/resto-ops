@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fix-It Cam — eval clips</title>
+<style>body{margin:0;background:#0d0f12;color:#eef1f5;font:16px/1.45 -apple-system,Segoe UI,Roboto,sans-serif}main{max-width:640px;margin:auto;padding:20px 16px}
+.card{background:#161a20;border:1px solid #252b34;border-radius:16px;padding:16px;margin-top:14px}label{display:block;font-size:13px;color:#9aa4b2;margin:12px 0 4px}
+input[type=text]{width:100%;box-sizing:border-box;background:#0f1216;border:1px solid #252b34;color:#eef1f5;border-radius:10px;padding:11px}
+button{margin-top:14px;width:100%;background:#ff7a1a;border:0;border-radius:12px;padding:14px;font-weight:700;font-size:16px}
+li{font-size:14px;margin:4px 0}small{color:#9aa4b2}</style></head><body><main>
+<h2>🔧 Eval clips</h2><p><small><b>Keep clips 5–10 s.</b> Big clips are shrunk on your phone before upload. One item per upload: pick one or more clips of the <b>same</b> broken item, then type what the right replacement must mention.</small></p>
+<div class="card"><label>Clips (video or photo)</label><input id="f" type="file" accept="video/*,image/*" multiple>
+<label>Expected part keywords (comma-separated, all must match), e.g. <i>magsafe, 60w</i></label><input id="kw" type="text">
+<label>What it is (optional, for the failure log)</label><input id="desc" type="text" placeholder="frayed MacBook Pro 2015 charger">
+<button id="go">Upload</button><div id="msg" style="margin-top:10px"></div><div style="height:8px;background:#222833;border-radius:6px;overflow:hidden;margin-top:8px"><div id="bar" style="height:100%;width:0;background:#ff7a1a"></div></div></div>
+<div class="card"><b>Clips so far</b> <small id="n"></small><ul id="list"></ul></div>
+<script src="/static/upload.js"></script>
+<script>
+const K=new URLSearchParams(location.search).get('k')||'';const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+async function load(){const r=await fetch('/api/eval-clips?k='+encodeURIComponent(K));const j=await r.json();const e=Object.entries(j);
+document.getElementById('n').textContent=`(${e.length})`;document.getElementById('list').innerHTML=e.reverse().map(([n,v])=>`<li>${esc(n)} — <small>${esc(v.keywords.join(', '))}</small></li>`).join('')}
+document.getElementById('go').onclick=async()=>{const fs=[...document.getElementById('f').files];const kw=document.getElementById('kw').value;
+if(!fs.length||!kw.trim()){alert('Pick clips and type keywords');return}
+const U=window.FixItUpload,m=document.getElementById('msg'),bar=document.getElementById('bar'),go=document.getElementById('go');go.disabled=true;
+try{const fd=new FormData();
+ for(const [i,f] of fs.entries()){const p=await U.prepare(f,t=>m.textContent=`Clip ${i+1}/${fs.length}: ${t}`,{allowFrames:false});p.files.forEach(x=>fd.append('files',x,(f.name||'clip').replace(/\.[^.]+$/,'')+'.'+(x.name.split('.').pop())))}
+ fd.append('keywords',kw);fd.append('description',document.getElementById('desc').value);fd.append('k',K);
+ const r=JSON.parse(await U.upload('/api/eval-upload',fd,{onProgress:(b,t)=>{bar.style.width=(t?100*b/t:0)+'%';m.textContent=`Uploading ${U.fmtMB(b)}${t?' / '+U.fmtMB(t):''}`}}));
+ m.textContent=`Saved ${r.saved.length} clip(s). Total: ${r.total_clips}`;document.getElementById('f').value='';load();
+}catch(e){m.textContent='Error: '+e.message}finally{go.disabled=false}};
+load();
+</script></main></body></html>

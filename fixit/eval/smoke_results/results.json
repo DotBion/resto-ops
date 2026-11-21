@@ -1,0 +1,2783 @@
+[
+  {
+    "clip": "macbook_cable_clean.mp4",
+    "keywords": [
+      "magsafe"
+    ],
+    "description": "frayed Apple MagSafe MacBook charger cable",
+    "full": {
+      "diagnosis": {
+        "item": "Apple MagSafe Power Adapter",
+        "brand": "Apple",
+        "model": "",
+        "broken_part": "DC output power cord",
+        "failure": "Severed wire and frayed white outer insulation exposing the internal braided metal shielding near the gray cable clip and strain relief.",
+        "specs": [
+          {
+            "name": "Color",
+            "value": "White with gray cable management clip",
+            "source": "seen"
+          },
+          {
+            "name": "Cable construction",
+            "value": "Coaxial DC cord with braided shielding",
+            "source": "seen"
+          },
+          {
+            "name": "Connector type",
+            "value": "Apple MagSafe (exact generation not visible; verify MagSafe 1 vs. MagSafe 2 on laptop port or old plug tip and wattage label on power brick before ordering",
+            "source": "inferred"
+          }
+        ],
+        "evidence": [
+          {
+            "t": "00:00",
+            "observation": "White cable insulation is split open below a gray cord clip, exposing braided metal shielding, with a severed cable end visible at the top right; Apple service receipt visible underneath."
+          },
+          {
+            "t": "00:02",
+            "observation": "Close-up clearly shows the frayed jacket, exposed metal braiding, and severed inner conductor."
+          }
+        ],
+        "replace": "Full Apple MagSafe Power Adapter matching your MacBook's connector generation and wattage (DC replacement cords exist for DIY repair, but replacing the entire sealed adapter is recommended).",
+        "repair_tip": "Unplug and stop using the damaged cord immediately to prevent short circuits or fire hazards, and replace the power adapter with one matching the wattage and MagSafe connector of your MacBook.",
+        "search_queries": [
+          "Apple MagSafe power adapter",
+          "Apple MagSafe replacement DC cable",
+          "MacBook MagSafe charger"
+        ],
+        "best_frame_seconds": 2,
+        "confidence": 0.75,
+        "uncertainties": [
+          "The MagSafe plug tip (MagSafe 1 vs. MagSafe 2) is out of frame.",
+          "The power brick label and wattage rating (45W, 60W, or 85W) are not visible.",
+          "No cable part number or adapter model number can be read."
+        ]
+      },
+      "timings": {
+        "upload_s": 3.52,
+        "diagnose_s": 13.39,
+        "search_s": 0.71,
+        "gate_s": 0.4,
+        "rank_s": 4.48,
+        "total_s": 22.66
+      },
+      "latency_s": 22.66,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": true,
+      "judge@3": true,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": true,
+          "why": "Matches MagSafe (1st generation) power adapter."
+        },
+        {
+          "index": 1,
+          "fixes": false,
+          "why": "This is a MagSafe 2 adapter, which is not compatible with a MagSafe (1st generation) port."
+        },
+        {
+          "index": 2,
+          "fixes": false,
+          "why": "This is a MagSafe 2 adapter, which is not compatible with a MagSafe (1st generation) port."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Apple 45W MagSafe Power Adapter",
+          "price_minor": 7900,
+          "fit": 0.543,
+          "kw": true,
+          "url": "https://www.svacampusstore.com/products/apple-45w-magsafe-power-adapter?variant=43086596342012&_gsid=CwoUCxwwagqU&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Apple 85W MagSafe 2 Power Adapter (New in Box)",
+          "price_minor": 4995,
+          "fit": 0.513,
+          "kw": true,
+          "url": "https://pcretroshop.com/products/apple-85w-magsafe-2-power-adapter-new-in-box?variant=41431425515695&_gsid=Mae9paz2qEjV&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Apple (45-Watt) MagSafe 2 Power Adapter with Folding Wall Plug - White (A1436)",
+          "price_minor": 1295,
+          "fit": 0.478,
+          "kw": true,
+          "url": "https://simplecellshop.com/products/app874034098?variant=42211394519290&_gsid=Mae9paz2qEjV&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    },
+    "baseline": {
+      "query": "Apple MagSafe power adapter",
+      "latency_s": 2.59,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": false,
+      "judge@3": false,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": false,
+          "why": "This is a MagSafe 2 power adapter, which is not compatible with an original MagSafe connector."
+        },
+        {
+          "index": 1,
+          "fixes": false,
+          "why": "This is a MagSafe 2 power adapter, which is not compatible with an original MagSafe connector."
+        },
+        {
+          "index": 2,
+          "fixes": false,
+          "why": "This is a MagSafe 2 power adapter, which is not compatible with an original MagSafe connector."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Apple (45-Watt) MagSafe 2 Power Adapter with Folding Wall Plug - White (A1436)",
+          "price_minor": 1295,
+          "fit": null,
+          "kw": true,
+          "url": "https://simplecellshop.com/products/app874034098?variant=42211394519290&_gsid=gv1nsD4NMZYi&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Apple 85W MagSafe 2 Power Adapter (New in Box)",
+          "price_minor": 4995,
+          "fit": null,
+          "kw": true,
+          "url": "https://pcretroshop.com/products/apple-85w-magsafe-2-power-adapter-new-in-box?variant=41431425515695&_gsid=gv1nsD4NMZYi&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Apple 45W MagSafe 2 Power Adapter with 3-Prong Wall Cable - White (A1436)",
+          "price_minor": 500,
+          "fit": null,
+          "kw": true,
+          "url": "https://simplecellbulk.com/products/app400199941?variant=53093595054296&_gsid=gv1nsD4NMZYi&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    }
+  },
+  {
+    "clip": "macbook_cable_messy.mp4",
+    "keywords": [
+      "magsafe"
+    ],
+    "description": "frayed Apple MagSafe MacBook charger cable",
+    "full": {
+      "diagnosis": {
+        "item": "Apple MagSafe Power Adapter DC Cable",
+        "brand": "Apple",
+        "model": "",
+        "broken_part": "DC power cord outer jacket and inner shielding",
+        "failure": "Severely frayed outer insulation exposing braided metal shielding and inner conductors near the cord clip, plus a severed white cable end visible nearby",
+        "specs": [
+          {
+            "name": "Color",
+            "value": "White with light gray cord clip",
+            "source": "seen"
+          },
+          {
+            "name": "Connector type",
+            "value": "MagSafe DC cable (exact version MagSafe 1 vs MagSafe 2 not visible in frame, verify against MacBook port and power brick wattage: 45W, 60W, or 85W",
+            "source": "inferred"
+          }
+        ],
+        "evidence": [
+          {
+            "t": "00:00",
+            "observation": "White cable with gray cord clip shows torn outer jacket and exposed braided shielding"
+          },
+          {
+            "t": "00:01",
+            "observation": "Apple service paperwork visible underneath; second severed white cable end appears at top right"
+          },
+          {
+            "t": "00:04",
+            "observation": "Clear close-up of the frayed outer jacket and exposed metal braid below the gray clip"
+          }
+        ],
+        "replace": "Complete Apple MagSafe Power Adapter (or replacement MagSafe DC cord if soldering/opening the sealed brick, though replacing the full adapter is recommended for safety); verify MacBook model and wattage (45W, 60W, or 85W) and MagSafe 1 vs MagSafe 2 connector",
+        "repair_tip": "Unplug the adapter from the wall immediately and stop using it to avoid shock or fire hazard. Because Apple power bricks are ultrasonically sealed, replace the entire power adapter with a genuine wattage-matched unit rather than splicing the frayed DC cord.",
+        "search_queries": [
+          "Apple MagSafe power adapter replacement",
+          "Apple MagSafe 2 power adapter 60W 85W 45W",
+          "Apple MagSafe 1 L-tip T-tip power adapter"
+        ],
+        "best_frame_seconds": 4,
+        "confidence": 0.72,
+        "uncertainties": [
+          "Power brick label and magnetic connector tip are out of frame, so exact wattage (45W/60W/85W) and connector generation (MagSafe 1 vs MagSafe 2) cannot be confirmed",
+          "No audio is present in the clip",
+          "A second severed white cable end is visible at the top right at 00:01-00:05 and may be part of the same damaged cord or a separate cable"
+        ]
+      },
+      "timings": {
+        "upload_s": 3.55,
+        "diagnose_s": 9.24,
+        "search_s": 1.09,
+        "gate_s": 0.4,
+        "rank_s": 4.49,
+        "total_s": 18.93
+      },
+      "latency_s": 18.93,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": false,
+      "judge@3": true,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": false,
+          "why": "This is a MagSafe 2 power adapter, which is not compatible with a MagSafe (1) MacBook."
+        },
+        {
+          "index": 1,
+          "fixes": false,
+          "why": "This is a MagSafe 2 power adapter, which is not compatible with a MagSafe (1) MacBook."
+        },
+        {
+          "index": 2,
+          "fixes": true,
+          "why": "This is a genuine Apple MagSafe power adapter, which is a direct whole replacement for the frayed MagSafe charger."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Genuine Apple MacBook *MagSafe 2* AC Power Adapter",
+          "price_minor": 2495,
+          "fit": 0.649,
+          "kw": true,
+          "url": "https://macbookadapter.com/products/genuine-apple-macbook-magsafe-2-ac-power-adapter?variant=41231054929992&_gsid=KQviX5TxJkw3&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Original Apple MagSafe 2 Power Adapter for Apple MacBook Pro Retina & MacBook Air 45W 60W 85W (NA/USA Plug)",
+          "price_minor": 2499,
+          "fit": 0.612,
+          "kw": true,
+          "url": "https://eoe.works/products/original-apple-magsafe-2-85w-power-adapter-for-apple-macbook-pro-retina-macbook-air-unibody-na-usa-plug?variant=47703234642057&_gsid=KQviX5TxJkw3&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "\u2665 New, Open Box - Apple 60W MagSafe Power Adapter MC461LL/A",
+          "price_minor": 2999,
+          "fit": 0.59,
+          "kw": true,
+          "url": "https://smalldog.com/products/%E2%99%A5-new-open-box-apple-60w-magsafe-power-adapter-mc461ll-a?variant=42909415473330&_gsid=bhx9nW9nZNCo&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    },
+    "baseline": {
+      "query": "ballpoint pens",
+      "latency_s": 3.28,
+      "kw@1": false,
+      "kw@3": false,
+      "judge@1": false,
+      "judge@3": false,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": false,
+          "why": "This is a ballpoint pen, not a MagSafe charger cable."
+        },
+        {
+          "index": 1,
+          "fixes": false,
+          "why": "This is a ballpoint pen, not a MagSafe charger cable."
+        },
+        {
+          "index": 2,
+          "fixes": false,
+          "why": "This is a ballpoint pen, not a MagSafe charger cable."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Smooth Oil Ink Ballpoint Pen 0.38 mm - Black",
+          "price_minor": 240,
+          "fit": null,
+          "kw": false,
+          "url": "https://www.muji.us/products/smooth-oil-ink-ballpoint-pen-0-38-mm-black-nbe01a3a?variant=45741130481854&_gsid=HWHfC3mSM4v7&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Pentel Calme Ballpoint Pen - 0.35mm",
+          "price_minor": 300,
+          "fit": null,
+          "kw": false,
+          "url": "https://yosekastationery.com/products/pentel-calme-ballpoint-pen-0-38mm?variant=45951592431829&_gsid=HWHfC3mSM4v7&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Penco Perfection Ballpoint Pen",
+          "price_minor": 1100,
+          "fit": null,
+          "kw": false,
+          "url": "https://www.jennibick.com/products/penco-perfection-ballpoint-pen?variant=44052393132131&_gsid=HWHfC3mSM4v7&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    }
+  },
+  {
+    "clip": "aerator_clean.mp4",
+    "keywords": [
+      "aerator"
+    ],
+    "description": "worn swivel faucet aerator",
+    "full": {
+      "diagnosis": {
+        "item": "Swivel faucet aerator / dual-function sink sprayer attachment",
+        "brand": "",
+        "model": "",
+        "broken_part": "Aerator housing, swivel joint, and outlet mesh screen",
+        "failure": "Heavy mineral/limescale buildup, flaking chrome finish, and clogged/corroded aerator mesh screen",
+        "specs": [
+          {
+            "name": "Type",
+            "value": "Swivel dual-mode faucet aerator",
+            "source": "seen"
+          },
+          {
+            "name": "Finish",
+            "value": "Chrome and black",
+            "source": "seen"
+          },
+          {
+            "name": "Included seal",
+            "value": "Black rubber washer/gasket",
+            "source": "seen"
+          },
+          {
+            "name": "Thread size",
+            "value": "Standard kitchen/bathroom faucet thread (likely M22 female or M24 male, verify before ordering if needed; exact size not measurable in clip, though a bagged replacement is already present on the left).",
+            "source": "inferred"
+          }
+        ],
+        "evidence": [
+          {
+            "t": "00:00",
+            "observation": "Old swivel faucet aerator on the right shows heavy white limescale buildup and worn chrome plating next to a new replacement in a plastic bag on the left."
+          },
+          {
+            "t": "00:05",
+            "observation": "Closer view highlights severe mineral deposits around the swivel collar, body, and outlet mesh screen of the old aerator."
+          }
+        ],
+        "replace": "Complete swivel faucet aerator assembly (already shown bagged on the left as a replacement).",
+        "repair_tip": "Clean any remaining mineral residue off the faucet spout threads, place the new black rubber washer inside the top of the new aerator, and screw it onto the faucet clockwise until hand-tight.",
+        "search_queries": [
+          "swivel faucet aerator dual mode chrome black",
+          "kitchen sink swivel aerator sprayer replacement",
+          "universal faucet aerator M22 M24"
+        ],
+        "best_frame_seconds": 5,
+        "confidence": 0.9,
+        "uncertainties": [
+          "Exact thread diameter and pitch (such as M22, M24, or 55/64-27) cannot be confirmed visually",
+          "No brand name or model number is visible on either unit",
+          "No spoken audio or narration was available"
+        ]
+      },
+      "timings": {
+        "upload_s": 3.22,
+        "diagnose_s": 6.29,
+        "search_s": 0.81,
+        "gate_s": 0.58,
+        "rank_s": 3.95,
+        "total_s": 15.01
+      },
+      "latency_s": 15.01,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": true,
+      "judge@3": true,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": true,
+          "why": "This is a dual-thread double swivel spray faucet aerator, which directly replaces a worn swivel faucet aerator."
+        },
+        {
+          "index": 1,
+          "fixes": true,
+          "why": "This is a 360-degree swivel kitchen faucet aerator, which directly replaces a worn swivel faucet aerator."
+        },
+        {
+          "index": 2,
+          "fixes": true,
+          "why": "This is a 360-degree swivel kitchen faucet aerator, which directly replaces a worn swivel faucet aerator."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Spray Faucet Aerator, Dual Thread, Double Swivel, Chrome & Black",
+          "price_minor": 949,
+          "fit": 0.901,
+          "kw": true,
+          "url": "https://stpetershardware.com/products/spray-faucet-aerator-dual-thread-double-swivel-chrome-black?variant=43512955666641&_gsid=nnWggzHwYxUj&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "360\u00b0 Swivel Kitchen Faucet Aerator with Dual Mode Sprayer",
+          "price_minor": 900,
+          "fit": 0.889,
+          "kw": true,
+          "url": "https://smartpickstidy.com/products/swivel-kitchen-faucet-aerator?variant=59919386673500&_gsid=nnWggzHwYxUj&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "360 Degree Swivel Kitchen Faucet Aerator Adjustable Dual Mode Sprayer",
+          "price_minor": 1099,
+          "fit": 0.847,
+          "kw": true,
+          "url": "https://onlytenbucks.com/products/360-degree-swivel-kitchen-faucet-aerator-adjustable-dual-mode-sprayer-filter-diffuser-water-saving-nozzle-bath-faucet-connector?variant=53247290409240&_gsid=1rYwoRtpfJbZ&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    },
+    "baseline": {
+      "query": "swivel faucet aerator",
+      "latency_s": 2.28,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": true,
+      "judge@3": true,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": true,
+          "why": "This is a swivel faucet aerator, which directly replaces a worn swivel faucet aerator."
+        },
+        {
+          "index": 1,
+          "fixes": true,
+          "why": "This is a 360-degree swivel kitchen faucet aerator, which matches the required aerator replacement."
+        },
+        {
+          "index": 2,
+          "fixes": true,
+          "why": "This is a 360-degree swivel kitchen faucet aerator, which directly replaces the worn aerator."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Swivel Faucet Aerator, Chrome, 85\u00b0 Angle",
+          "price_minor": 1399,
+          "fit": null,
+          "kw": true,
+          "url": "https://www.totomo.us/products/kitchen-sink-faucet-aerator-solid-brass-2-spray-mode-shower-bubble-stream-360-swivel-booster-sprayer-adapter-water-saving-head-attachment-replacement-chrome-big-angle-swiveling?variant=39350100426830&_gsid=7tdvSS2w9mJf&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "360\u00b0 Swivel Kitchen Faucet Aerator - 3-Mode Water Saving Spray Nozzle",
+          "price_minor": 799,
+          "fit": null,
+          "kw": true,
+          "url": "https://lumorahg.com/products/2-3-modes-universal-kitchen-faucet-adapter-360-rotation-faucet-filter-extenders-kitchen-gadgets-spray-water-saving-tap-nozzle?variant=51497074458933&_gsid=7tdvSS2w9mJf&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "360\u00b0 Swivel Kitchen Faucet Aerator",
+          "price_minor": 1199,
+          "fit": null,
+          "kw": true,
+          "url": "https://smartpicksworld.com/products/360-swivel-kitchen-faucet-aerator?variant=53966893416775&_gsid=7tdvSS2w9mJf&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    }
+  },
+  {
+    "clip": "aerator_messy.mp4",
+    "keywords": [
+      "aerator"
+    ],
+    "description": "worn swivel faucet aerator",
+    "full": {
+      "diagnosis": {
+        "item": "Swivel faucet aerator (tap nozzle)",
+        "brand": "",
+        "model": "",
+        "broken_part": "Aerator body, chrome-plated collar, and internal seals",
+        "failure": "Heavy mineral/limescale buildup around the nozzle tip and upper collar, with peeling/pitted chrome plating indicating wear and likely clogging or leaking.",
+        "specs": [
+          {
+            "name": "Finish",
+            "value": "Black and chrome",
+            "source": "seen"
+          },
+          {
+            "name": "Seal",
+            "value": "Flat black rubber washer included",
+            "source": "seen"
+          },
+          {
+            "name": "Body style",
+            "value": "Swivel neck with ribbed grip collar",
+            "source": "seen"
+          },
+          {
+            "name": "Thread size",
+            "value": "Standard faucet thread (typically M22 female or M24 male; verify against spout)",
+            "source": "inferred"
+          }
+        ],
+        "evidence": [
+          {
+            "t": "00:00",
+            "observation": "Worn black-and-chrome unit on the right shows chipped chrome plating and white scale deposits around the nozzle opening."
+          },
+          {
+            "t": "00:02",
+            "observation": "Matching new replacement part is shown sealed in a clear plastic bag on the left alongside a black rubber washer."
+          },
+          {
+            "t": "00:03",
+            "observation": "Close-up of the old unit highlights heavy mineral buildup and surface deterioration on the flared chrome collar."
+          },
+          {
+            "t": "00:05",
+            "observation": "Side-by-side comparison of the new bagged part on the left and the worn original part on the right."
+          }
+        ],
+        "replace": "Complete swivel faucet aerator assembly with matching thread size and rubber washer (matching the sealed replacement shown on the left).",
+        "repair_tip": "Unscrew the old aerator counterclockwise from the faucet spout (wrap a cloth around it if using pliers), clean any mineral deposits from the spout threads, seat the new black rubber washer inside the top collar, and hand-tighten the replacement clockwise.",
+        "search_queries": [
+          "swivel faucet aerator black chrome replacement with washer",
+          "360 swivel kitchen tap aerator nozzle M22 M24",
+          "universal faucet aerator replacement"
+        ],
+        "best_frame_seconds": 3,
+        "confidence": 0.55,
+        "uncertainties": [
+          "No brand name, model number, or dimension markings are visible in the footage.",
+          "No audio narration is present to confirm the exact fixture or application.",
+          "Exact thread type/size (such as M22 female, M24 male, or quick-connect hose fitting) cannot be confirmed without seeing the internal threads."
+        ]
+      },
+      "timings": {
+        "upload_s": 2.57,
+        "diagnose_s": 18.04,
+        "search_s": 0.92,
+        "gate_s": 0.22,
+        "rank_s": 6.45,
+        "total_s": 28.36
+      },
+      "latency_s": 28.36,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": true,
+      "judge@3": true,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": true,
+          "why": "It is a swivel faucet aerator with dual inside/outside threads, which directly replaces a worn swivel faucet aerator."
+        },
+        {
+          "index": 1,
+          "fixes": true,
+          "why": "It is a 360-degree swivel faucet aerator designed for standard kitchen and bathroom faucets, matching the required aerator replacement."
+        },
+        {
+          "index": 2,
+          "fixes": true,
+          "why": "It is a 360-degree swivel tap aerator that fits standard M22/M24 faucets, matching the required aerator replacement."
+        }
+      ],
+      "top3": [
+        {
+          "title": "PlumbCraft 7610700T Swing & Spray Swivel Aerator, Dual Inside/Outside Threads",
+          "price_minor": 744,
+          "fit": 0.884,
+          "kw": true,
+          "url": "https://quagmirerepair.com/products/plumbcraft-7610700t-swing-spray-swivel-aerator-dual-inside-outside-threads?variant=45771620679876&_gsid=CpMUzHXv6qnZ&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "360\u00b0 Swivel Faucet Aerator \u2013 Splash-Proof Water-Saving Tap Nozzle for Kitchen & Bathroom, Fits 22mm (0.87 in) Female & 24mm (0.94 in) Male",
+          "price_minor": 999,
+          "fit": 0.85,
+          "kw": true,
+          "url": "https://fanzymarket.com/products/360-swivel-faucet-aerator-splash-proof-water-saving-tap-nozzle-for-kitchen-bathroom-fits-22mm-0-87-in-female-24mm-0-94-in-male?variant=49937428742337&_gsid=hbrzjcQrR6i6&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "360\u00b0 Rotate Swivel Water Saving Tap Aerator Diffuser Faucet Nozzle Filter Adapter, Dual Spray Stream, Fits M22 M24 Kitchen Sink & Utility Faucets",
+          "price_minor": 2986,
+          "fit": 0.828,
+          "kw": true,
+          "url": "https://spalace.us/products/360-rotate-swivel-water-saving-tap-aerator-diffuser-faucet-nozzle-filter-adapter-dual-spray-stream-fits-m22-m24-kitchen-sink-utility-faucets?variant=47727540732093&_gsid=hbrzjcQrR6i6&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    },
+    "baseline": {
+      "query": "garden hose quick connector",
+      "latency_s": 5.94,
+      "kw@1": false,
+      "kw@3": false,
+      "judge@1": false,
+      "judge@3": false,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": false,
+          "why": "This is a quick connect set for garden hoses, not a faucet aerator."
+        },
+        {
+          "index": 1,
+          "fixes": false,
+          "why": "This is a quick connect starter set for garden hoses, not a faucet aerator."
+        },
+        {
+          "index": 2,
+          "fixes": false,
+          "why": "This is a quick connector set for hose reels and nozzles, not a faucet aerator."
+        }
+      ],
+      "top3": [
+        {
+          "title": "GORILLA EASY CONNECT\u00ae Solid Brass Quick Connect Set with SecureLock\u2122 - Standard \u00be Inch GHT Fittings for Garden Hoses and Faucets",
+          "price_minor": 1197,
+          "fit": null,
+          "kw": false,
+          "url": "https://gorillaeasyconnect.com/products/gorilla-easy-connect%C2%AE?variant=30282764484644&_gsid=vxsJJwWAjEhu&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "5 Piece Quick Connect Starter Set 18270",
+          "price_minor": 999,
+          "fit": null,
+          "kw": false,
+          "url": "https://us.gardena.com/products/5-piece-quick-connect-starter-set?variant=44146740396219&_gsid=vxsJJwWAjEhu&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Vego Quick Connector Set V1 - Set of 6",
+          "price_minor": 1695,
+          "fit": null,
+          "kw": false,
+          "url": "https://www.vegogarden.com/products/vego-quick-connector-set-v1-set-of-6?variant=40328147075107&_gsid=vxsJJwWAjEhu&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    }
+  },
+  {
+    "clip": "brakepads_clean.mp4",
+    "keywords": [
+      "brake pad"
+    ],
+    "description": "worn metallic disc brake pads",
+    "full": {
+      "diagnosis": {
+        "item": "Bicycle disc brake pads (2 pairs / 4 pads total)",
+        "brand": "",
+        "model": "",
+        "broken_part": "Friction lining on all four brake pads",
+        "failure": "Severely worn thin with deep radial scoring and rough, crumbling edges near the backing plates",
+        "specs": [
+          {
+            "name": "Type",
+            "value": "Bicycle disc brake pads",
+            "source": "inferred"
+          },
+          {
+            "name": "Quantity",
+            "value": "4 pads (2 pairs)",
+            "source": "seen"
+          },
+          {
+            "name": "Backing plate profile",
+            "value": "Two rounded ears forming a U-notch on one side, single angled tab on the opposite side",
+            "source": "seen"
+          },
+          {
+            "name": "Compound",
+            "value": "Likely sintered metallic or semi-metallic",
+            "source": "inferred"
+          }
+        ],
+        "evidence": [
+          {
+            "t": "00:00",
+            "observation": "All four brake pads are visible on a white surface, showing heavy wear and grooved friction surfaces."
+          },
+          {
+            "t": "00:05",
+            "observation": "Closest view of the front pair clearly shows deep scoring across the friction material and minimal remaining pad thickness above the backing plate."
+          }
+        ],
+        "replace": "Replacement bicycle disc brake pads matching the caliper model and exact backing plate shape (plus return springs/pins if needed)",
+        "repair_tip": "Verify your brake caliper brand and model or measure the backing plate before ordering. Inspect the brake rotor for matching grooves and minimum thickness, retract the caliper pistons cleanly, and bed in the new pads after installation.",
+        "search_queries": [
+          "bicycle disc brake pads replacement",
+          "MTB hydraulic disc brake pads",
+          "sintered disc brake pads bicycle"
+        ],
+        "best_frame_seconds": 5,
+        "confidence": 0.85,
+        "uncertainties": [
+          "No brand name, model number, or stamped part code is visible on any pad.",
+          "Exact caliper compatibility cannot be confirmed without measurements or seeing the brake caliper.",
+          "Original pad compound (resin, semi-metallic, or sintered) cannot be confirmed from visual wear alone."
+        ]
+      },
+      "timings": {
+        "upload_s": 2.54,
+        "diagnose_s": 11.53,
+        "search_s": 0.86,
+        "gate_s": 0.39,
+        "rank_s": 5.61,
+        "total_s": 21.09
+      },
+      "latency_s": 21.09,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": true,
+      "judge@3": true,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": true,
+          "why": "These are sintered (metallic) disc brake pads, which match the worn metallic disc brake pads."
+        },
+        {
+          "index": 1,
+          "fixes": false,
+          "why": "These are resin brake pads, not metallic brake pads."
+        },
+        {
+          "index": 2,
+          "fixes": false,
+          "why": "These are resin-ceramic brake pads, not metallic brake pads."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Hope X2 Sintered Disc Brake Pads",
+          "price_minor": 1785,
+          "fit": 0.463,
+          "kw": true,
+          "url": "https://www.sprocketscycles.com/products/hope-x2-disc-brake-pads-sintered?variant=40266347118775&_gsid=EEaRJoza4ucr&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Shimano B05S-RX Disc Brake Pad and Spring - Resin | Stainless Steel",
+          "price_minor": 1068,
+          "fit": 0.445,
+          "kw": true,
+          "url": "https://dialedcyclinglab.com/products/shimano-b05s-rx-disc-brake-pad-and-spring-resin-stainless-steel?variant=51131762868536&_gsid=Dqk3bXpjM5M6&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Tektro E10.11 Disc Brake Pads - 2 Pairs",
+          "price_minor": 3599,
+          "fit": 0.407,
+          "kw": true,
+          "url": "https://hyclinebike.com/products/tektro-e10-11-alloy-steel-disc-brake-pad?variant=45318804734177&_gsid=kwnsGrZtzWB2&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    },
+    "baseline": {
+      "query": "disc brake pads",
+      "latency_s": 4.78,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": true,
+      "judge@3": true,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": true,
+          "why": "This is a sintered (metallic) disc brake pad, which matches the required brake pad replacement."
+        },
+        {
+          "index": 1,
+          "fixes": true,
+          "why": "This is a metal disc brake pad, which matches the required brake pad replacement."
+        },
+        {
+          "index": 2,
+          "fixes": true,
+          "why": "This is a disc brake pad, which matches the required brake pad replacement."
+        }
+      ],
+      "top3": [
+        {
+          "title": "TRP DH-R EVO / Trail EVO / Quadiem \u2013 Sintered Disc Brake Pads (4-Piston) | Gorilla Brakes",
+          "price_minor": 1800,
+          "fit": null,
+          "kw": true,
+          "url": "https://gorillabrakes.com/products/sintered-brake-pads-trp-q20-11-dhr-quadiem?variant=55609962103167&_gsid=M26AE3aGqWvA&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Shimano J04C Metal Disc Brake Pads with Fins",
+          "price_minor": 3315,
+          "fit": null,
+          "kw": true,
+          "url": "https://www.evo.com/products/112725-shimano-j04c-metal-disc-brake-pads-with-fins?variant=46075311620246&_gsid=M26AE3aGqWvA&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "SRAM Disc Brake Pads - Organic Compound, Steel Backed, Powerful, For Trail, Guide, and G2",
+          "price_minor": 3000,
+          "fit": null,
+          "kw": true,
+          "url": "https://worldwidecyclery.com/products/sram-guide-g2-and-avid-trail-disc-brake-pads-steel-backed-powerful-organic-compound?variant=19146911449210&_gsid=M26AE3aGqWvA&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    }
+  },
+  {
+    "clip": "brakepads_messy.mp4",
+    "keywords": [
+      "brake pad"
+    ],
+    "description": "worn metallic disc brake pads",
+    "full": {
+      "diagnosis": {
+        "item": "Disc brake pads (set of 4 / 2 pairs)",
+        "brand": "",
+        "model": "",
+        "broken_part": "Brake pad friction material",
+        "failure": "Friction lining is heavily scored, grooved, and worn down, with rusted backing plates.",
+        "specs": [
+          {
+            "name": "Quantity",
+            "value": "4 pads (2 pairs)",
+            "source": "seen"
+          },
+          {
+            "name": "Backing plate tab layout",
+            "value": "Two small locating ears on one side and one extended retention tab on the opposite side (asymmetric curved and straight tabs across the two pad types)",
+            "source": "seen"
+          },
+          {
+            "name": "Compound",
+            "value": "Metallic / semi-metallic (inferred from metallic flecks and scoring, verify caliper compatibility)",
+            "source": "inferred"
+          }
+        ],
+        "evidence": [
+          {
+            "t": "00:00",
+            "observation": "Close-up of the right-hand pad showing deep grooves and scoring across the worn friction material and a straight side tab with two opposite ears."
+          },
+          {
+            "t": "00:01",
+            "observation": "All four pads visible; left two pads have a curved hook tab and right two have a straight tab, all showing worn, grooved friction surfaces."
+          },
+          {
+            "t": "00:04",
+            "observation": "Clear view of the front-left pad thickness and rusted backing plate edge."
+          }
+        ],
+        "replace": "Replacement disc brake pad set (matching the exact backing plate shape and dimensions of your brake caliper).",
+        "repair_tip": "Measure the backing plate length, width, and tab spacing or check your brake caliper model before ordering; clean the caliper and inspect the rotor for deep grooves before installing new pads.",
+        "search_queries": [
+          "disc brake pads two ears one hook tab",
+          "replacement disc brake pad set 2 pairs",
+          "semi metallic disc brake pads"
+        ],
+        "best_frame_seconds": 1,
+        "confidence": 0.78,
+        "uncertainties": [
+          "No brand, part number, or caliper model is visible or spoken.",
+          "Exact dimensions (length, width, thickness) cannot be measured from the video without a scale reference.",
+          "Unclear whether these are for a bicycle, e-bike, scooter, ATV, or motorcycle."
+        ]
+      },
+      "timings": {
+        "upload_s": 2.71,
+        "diagnose_s": 10.8,
+        "search_s": 0.97,
+        "gate_s": 0.18,
+        "rank_s": 4.63,
+        "total_s": 19.41
+      },
+      "latency_s": 19.41,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": true,
+      "judge@3": true,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": true,
+          "why": "This is a disc brake pad replacement."
+        },
+        {
+          "index": 1,
+          "fixes": true,
+          "why": "This is a disc brake pad replacement."
+        },
+        {
+          "index": 2,
+          "fixes": true,
+          "why": "This is a disc brake pad replacement."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Shimano MT Series (B-Type) \u2013 Semi-Metallic Disc Brake Pads | Gorilla Brakes",
+          "price_minor": 1500,
+          "fit": 0.545,
+          "kw": true,
+          "url": "https://gorillabrakes.com/products/gorilla-brakes-shimano-mt200-mt410-tx805?variant=55618814869887&_gsid=wLaYaeg54M77&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "SRAM / Avid BB5 \u2013 Semi-Metallic Disc Brake Pads | Gorilla Brakes",
+          "price_minor": 1500,
+          "fit": 0.484,
+          "kw": true,
+          "url": "https://gorillabrakes.com/products/gorilla-brakes-avid-bb5-disc-brake-pads?variant=55619401974143&_gsid=wLaYaeg54M77&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Semi-Metallic Disc Brake Pads",
+          "price_minor": 1799,
+          "fit": 0.368,
+          "kw": true,
+          "url": "https://mikesbikes.com/products/mtn-sport-semi-metallic-auriga-m515-pad?variant=19327499599939&_gsid=wLaYaeg54M77&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    },
+    "baseline": {
+      "query": "bicycle disc brake pads",
+      "latency_s": 3.64,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": false,
+      "judge@3": false,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": false,
+          "why": "These are resin disc brake pads, whereas the broken part is metallic disc brake pads."
+        },
+        {
+          "index": 1,
+          "fixes": false,
+          "why": "These are organic disc brake pads, whereas the broken part is metallic disc brake pads."
+        },
+        {
+          "index": 2,
+          "fixes": false,
+          "why": "The product does not specify that it is a metallic disc brake pad and appears to be for specific S4 models."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Shimano J03A Resin Disc Brake Pads",
+          "price_minor": 1999,
+          "fit": null,
+          "kw": true,
+          "url": "https://www.evo.com/products/184939-shimano-j03a-resin-disc-brake-pads?variant=46076444246166&_gsid=s99vBjFd6Miv&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "SRAM Code / DB8 / G2 RE / Guide RE / Motive \u2013 Factory Racing Organic Disc Brake Pads | Gorilla Brakes",
+          "price_minor": 1600,
+          "fit": null,
+          "kw": true,
+          "url": "https://gorillabrakes.com/products/gorilla-brakes-organic-sram-code-db8-motive?variant=55362857173375&_gsid=s99vBjFd6Miv&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Disc Brake Pads",
+          "price_minor": 1999,
+          "fit": null,
+          "kw": true,
+          "url": "https://euybike.com/products/disc-brake-pads?variant=45750035382324&_gsid=s99vBjFd6Miv&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    }
+  },
+  {
+    "clip": "umbrella_clean.mp4",
+    "keywords": [
+      "umbrella"
+    ],
+    "description": "broken umbrella with bent ribs",
+    "full": {
+      "diagnosis": {
+        "item": "Compact folding umbrella",
+        "brand": "",
+        "model": "",
+        "broken_part": "Frame rib or stretcher",
+        "failure": "A metal frame rib is snapped or detached from the canopy, protruding beside the telescopic shaft while the canopy lies inverted and collapsed",
+        "specs": [
+          {
+            "name": "Style",
+            "value": "Compact telescopic folding umbrella",
+            "source": "seen"
+          },
+          {
+            "name": "Handle",
+            "value": "Short straight handle with wrist strap",
+            "source": "seen"
+          },
+          {
+            "name": "Shaft",
+            "value": "Telescopic metal shaft",
+            "source": "seen"
+          }
+        ],
+        "evidence": [
+          {
+            "t": "00:00",
+            "observation": "Umbrella lies inverted on the ground with its canopy collapsed and a loose rib sticking upward near the shaft"
+          },
+          {
+            "t": "00:05",
+            "observation": "Closer view confirms the detached rib protruding parallel to the telescopic shaft and wrist-strap handle"
+          }
+        ],
+        "replace": "Whole replacement compact folding umbrella (proprietary replacement ribs are generally not sold separately for unbranded folding umbrellas; alternatively a universal umbrella rib repair kit if attempting a DIY splint fix for a clean break).",
+        "repair_tip": "Because bent or snapped telescopic umbrella ribs rarely hold tension reliably after bending, replacing the whole umbrella is best; if only a joint pin popped out, reattach it with thin stainless wire or a crimp sleeve.",
+        "search_queries": [
+          "compact folding travel umbrella windproof",
+          "telescopic folding umbrella wrist strap",
+          "universal umbrella rib repair kit"
+        ],
+        "best_frame_seconds": 5,
+        "confidence": 0.78,
+        "uncertainties": [
+          "Video is black-and-white so canopy color is unknown",
+          "No brand, model number, or dimensions are visible or audible",
+          "Cannot confirm whether additional ribs inside the folded canopy are also bent or snapped"
+        ]
+      },
+      "timings": {
+        "upload_s": 2.29,
+        "diagnose_s": 8.59,
+        "search_s": 0.96,
+        "gate_s": 0.43,
+        "rank_s": 5.78,
+        "total_s": 18.27
+      },
+      "latency_s": 18.27,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": true,
+      "judge@3": true,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": true,
+          "why": "This is a complete umbrella that serves as a whole replacement for the broken umbrella."
+        },
+        {
+          "index": 1,
+          "fixes": true,
+          "why": "This is a complete umbrella that serves as a whole replacement for the broken umbrella."
+        },
+        {
+          "index": 2,
+          "fixes": true,
+          "why": "This is a complete umbrella that serves as a whole replacement for the broken umbrella."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Umbrella",
+          "price_minor": 965,
+          "fit": 0.813,
+          "kw": true,
+          "url": "https://streamlightgear.com/products/umbrella?variant=47868769108276&_gsid=UHj6F3ca3BoB&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "44\" ARC TELESCOPIC FOLDING WOOD HANDLE UMBRELLA",
+          "price_minor": 1000,
+          "fit": 0.842,
+          "kw": true,
+          "url": "https://uvahs.myshopify.com/products/44-arc-telescopic-folding-wood-handle-umbrella?variant=32836897538127&_gsid=UHj6F3ca3BoB&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Rain-Mate Compact Travel Stick Umbrella - Portable Folding Windproof Umbrella - Auto Open & Close Button",
+          "price_minor": 1799,
+          "fit": 0.902,
+          "kw": true,
+          "url": "https://upperechelonproducts.com/products/rain-mate-compact-travel-stick-umbrella-portable-folding-windproof-umbrella-auto-open-close-button-1?variant=62165950922911&_gsid=tgNqsFuVYqHS&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    },
+    "baseline": {
+      "query": "windproof folding umbrella",
+      "latency_s": 3.63,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": true,
+      "judge@3": true,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": true,
+          "why": "This is a complete folding umbrella, which serves as a full replacement for the broken umbrella."
+        },
+        {
+          "index": 1,
+          "fixes": true,
+          "why": "This is a complete 10-rib folding umbrella, which serves as a full replacement for the broken umbrella."
+        },
+        {
+          "index": 2,
+          "fixes": true,
+          "why": "This is a complete compact, foldable umbrella, which serves as a full replacement for the broken umbrella."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Ultimate Protection Folding Umbrella with Wind & Sun Protection",
+          "price_minor": 2800,
+          "fit": null,
+          "kw": true,
+          "url": "https://www.totes.com/products/totes-9-rib-43-3-sec-aoc-w-case?variant=44568502796420&_gsid=BN3nZ3q8Sh22&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "10-Rib Windproof Folding Umbrella \u2013 Automatic UV Protection",
+          "price_minor": 3599,
+          "fit": null,
+          "kw": true,
+          "url": "https://valuefinds.co/products/10-rib-windproof-folding-umbrella-automatic-uv-protection?variant=48694625927393&_gsid=BN3nZ3q8Sh22&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Automatic Open/Close Windproof Umbrella, Compact and Foldable",
+          "price_minor": 2799,
+          "fit": null,
+          "kw": true,
+          "url": "https://smartpicksworld.com/products/windproof-umbrella-compact?variant=55268298228039&_gsid=BN3nZ3q8Sh22&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    }
+  },
+  {
+    "clip": "umbrella_messy.mp4",
+    "keywords": [
+      "umbrella"
+    ],
+    "description": "broken umbrella with bent ribs",
+    "full": {
+      "diagnosis": {
+        "item": "Umbrella",
+        "brand": "",
+        "model": "",
+        "broken_part": "Frame rib and canopy support",
+        "failure": "Snapped metal rib protruding upward beside the shaft with a collapsed, inverted canopy",
+        "specs": [
+          {
+            "name": "Object type",
+            "value": "Portable umbrella with straight handle",
+            "source": "seen"
+          },
+          {
+            "name": "Color",
+            "value": "Dark (monochrome footage prevents exact color identificationLength/size unknown) wait",
+            "source": "seen"
+          }
+        ],
+        "evidence": [
+          {
+            "t": "00:00",
+            "observation": "Inverted umbrella resting on pavement with a broken rib sticking upward to the left of the shaft."
+          },
+          {
+            "t": "00:03",
+            "observation": "Full view of the crumpled canopy, upright shaft with handle at the top, and snapped rib protruding vertically."
+          }
+        ],
+        "replace": "Complete replacement umbrella (exact-fit replacement ribs for unbranded umbrellas are generally not sold separately).",
+        "repair_tip": "Because generic umbrella ribs are rarely standardized across brands, replace the entire umbrella (ideally with a windproof fiberglass-rib model) and wrap or tape the sharp broken rib tip before disposal.",
+        "search_queries": [
+          "windproof folding umbrella fiberglass ribs",
+          "compact umbrella",
+          "replacement umbrella"
+        ],
+        "best_frame_seconds": 3,
+        "confidence": 0.75,
+        "uncertainties": [
+          "Low-resolution grayscale footage hides brand markings, labels, and exact color.",
+          "Exact closed length, open canopy diameter, and rib count cannot be measured from the clip.",
+          "Damage to the runner or hub mechanism inside the canopy is not visible."
+        ]
+      },
+      "timings": {
+        "upload_s": 3.73,
+        "diagnose_s": 7.7,
+        "search_s": 0.79,
+        "gate_s": 0.19,
+        "rank_s": 5.46,
+        "total_s": 18.03
+      },
+      "latency_s": 18.03,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": true,
+      "judge@3": true,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": true,
+          "why": "This is a complete automatic folding umbrella, which directly replaces the broken umbrella."
+        },
+        {
+          "index": 1,
+          "fixes": true,
+          "why": "This is a complete automatic folding umbrella, which directly replaces the broken umbrella."
+        },
+        {
+          "index": 2,
+          "fixes": true,
+          "why": "This is a complete automatic folding umbrella, which directly replaces the broken umbrella."
+        }
+      ],
+      "top3": [
+        {
+          "title": "\u23f3Time-Limited Special\u23f0Automatic Folding Umbrella \u2013 Windproof, Waterproof & Compact",
+          "price_minor": 2499,
+          "fit": 0.725,
+          "kw": true,
+          "url": "https://pineapplea.com/products/stormshield?variant=52836829561117&_gsid=znyVK5Gm3BkR&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "\u2614Automatic Folding Umbrella \u2013 Windproof, Waterproof & Compact",
+          "price_minor": 2999,
+          "fit": 0.685,
+          "kw": true,
+          "url": "https://norbbshop.com/products/stormshield-1?variant=52426694131932&_gsid=znyVK5Gm3BkR&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Umbremo\u2122 Automatic Folding Umbrella",
+          "price_minor": 3999,
+          "fit": 0.66,
+          "kw": true,
+          "url": "https://umbremo.com/products/umbrella?variant=59769534284062&_gsid=WYkgX7r1KYij&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    },
+    "baseline": {
+      "query": "windproof black umbrella",
+      "latency_s": 1.76,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": true,
+      "judge@3": true,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": true,
+          "why": "This is a complete replacement umbrella."
+        },
+        {
+          "index": 1,
+          "fixes": true,
+          "why": "This is a complete replacement umbrella."
+        },
+        {
+          "index": 2,
+          "fixes": true,
+          "why": "This is a complete replacement umbrella."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Fibreglass Auto Vented Windproof Golf Umbrella - Black | 136cm Canopy | Wind Resistant",
+          "price_minor": 2100,
+          "fit": null,
+          "kw": true,
+          "url": "https://umbrellaworld.co.uk/products/vented-automatic-windproof-golf-umbrella-black-for-business?variant=32719629549677&_gsid=2zL2zGMhPeJf&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Multi-functional Windproof and Waterproof Automatic UV Protection Umbrella",
+          "price_minor": 3400,
+          "fit": null,
+          "kw": true,
+          "url": "https://gadgion.store/products/extra-large-reinforced-wind-resistant-rain-resistant-dual-purpose-uv-resistant-fully-automatic-ring-buckle-umbrella?variant=45190814695587&_gsid=2zL2zGMhPeJf&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Windproof Folding Umbrella \u2013 One-Button Auto Open & Close, UV Sun & Rain \u2013 HideWise London (Graphite Grey)",
+          "price_minor": 4270,
+          "fit": null,
+          "kw": true,
+          "url": "https://www.yourdirectwarehouse.com/products/luxury-automatic-umbrella-ultra-strong-anti-uv-brolly-by-hidewise-london?variant=43878940049629&_gsid=2zL2zGMhPeJf&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    }
+  },
+  {
+    "clip": "real_dripping_faucet.mp4",
+    "keywords": [
+      "faucet"
+    ],
+    "description": "dripping tap/faucet: needs a faucet cartridge, washer/seal kit, or a replacement faucet",
+    "full": {
+      "diagnosis": {
+        "item": "Grey plastic (PVC/ABS) single-cold deck-mount gooseneck kitchen faucet",
+        "brand": "",
+        "model": "",
+        "broken_part": "Undetermined (no visible external break; possibly internal valve/cartridge or faucet handle)",
+        "failure": "No visible crack, leak, or missing component is clearly identifiable in the static footage; exact fault cannot be confirmed without a close-up, water test, or audio description.",
+        "specs": [
+          {
+            "name": "Mount type",
+            "value": "Single-hole deck mount",
+            "source": "seen"
+          },
+          {
+            "name": "Water supply",
+            "value": "Single cold water",
+            "source": "seen"
+          },
+          {
+            "name": "Material",
+            "value": "Plastic / PVC (grey body with green handle)",
+            "source": "seen"
+          },
+          {
+            "name": "Spout style",
+            "value": "High-arc gooseneck",
+            "source": "seen"
+          },
+          {
+            "name": "Thread size",
+            "value": "Typically 1/2 inch BSP/NPT (verify underneath sink before ordering)",
+            "source": "inferred"
+          }
+        ],
+        "evidence": [
+          {
+            "t": "00:00",
+            "observation": "Wide static view of a brown sink with a grey deck-mounted plastic gooseneck faucet and green tri-lobe handle; no visible fracture or water flow."
+          },
+          {
+            "t": "00:07",
+            "observation": "Camera angle and framing remain unchanged throughout the clip with no close-up of any damaged part."
+          }
+        ],
+        "replace": "Complete grey plastic single-cold deck-mount kitchen faucet (inexpensive PVC faucets are typically replaced as a whole unit rather than repaired with internal parts)",
+        "repair_tip": "Shut off the cold water supply valve under the sink, unscrew the supply hose and mounting nut beneath the deck, and install the new faucet with a rubber washer or plumber's tape on the threads.",
+        "search_queries": [
+          "PVC plastic single cold deck mount gooseneck kitchen faucet",
+          "grey plastic basin tap single hole cold water",
+          "deck mounted single cold kitchen sink tap 1/2 inch"
+        ],
+        "best_frame_seconds": 0,
+        "confidence": 0.25,
+        "uncertainties": [
+          "No visible damage, leak, or movement appears in the static clip.",
+          "No audio or narration is present to explain what is malfunctioning.",
+          "Thread diameter (e.g., 1/2 inch) and mounting hole size cannot be measured from this distance.",
+          "Brand and model markings are not legible at this resolution."
+        ]
+      },
+      "timings": {
+        "upload_s": 2.56,
+        "diagnose_s": 10.14,
+        "search_s": 0.72,
+        "gate_s": 0.43,
+        "rank_s": 5.11,
+        "total_s": 19.07
+      },
+      "latency_s": 19.07,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": true,
+      "judge@3": true,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": true,
+          "why": "This is a replacement faucet, which matches the required replacement for a dripping tap/faucet."
+        },
+        {
+          "index": 1,
+          "fixes": true,
+          "why": "This is a replacement faucet, which matches the required replacement for a dripping tap/faucet."
+        }
+      ],
+      "top3": [
+        {
+          "title": "1pc Single Kitchen Plastic Faucet Engineering Household Kitchen Sink Single Hole Tap",
+          "price_minor": 399,
+          "fit": 0.737,
+          "kw": true,
+          "url": "https://m0vb6w-uf.myshopify.com/products/1pc-single-kitchen-plastic-faucet-engineering-household-kitchen-sink-single-hole-tap?variant=53920108872016&_gsid=sr2p6ctvJCNR&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Stainless Steel Cold Water Kitchen Faucet Rotating Water Utility Tap",
+          "price_minor": 15190,
+          "fit": 0.423,
+          "kw": true,
+          "url": "https://indexbath.com/products/wall-or-deck-mount-cold-water-kitchen-faucet-rotate-bathroom-tap-pot-304-stainless-steel-out-door-faucet?variant=50913541488879&_gsid=AujAH2arVpm7&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    },
+    "baseline": {
+      "query": "kitchen sink faucet",
+      "latency_s": 3.57,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": true,
+      "judge@3": true,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": true,
+          "why": "This is a replacement kitchen faucet, which matches the requirement for a replacement faucet."
+        },
+        {
+          "index": 1,
+          "fixes": true,
+          "why": "This is a replacement kitchen faucet, which matches the requirement for a replacement faucet."
+        },
+        {
+          "index": 2,
+          "fixes": true,
+          "why": "This is a replacement kitchen faucet, which matches the requirement for a replacement faucet."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Touchless Single Handle Kitchen Faucet with 3 Functions Spray",
+          "price_minor": 16599,
+          "fit": null,
+          "kw": true,
+          "url": "https://www.casainc.com/products/touchless-single-handle-kitchen-faucet-with-3-functions-spray?variant=46667045896354&_gsid=e5RB9kG3nfft&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Single Handle Pull-Out Kitchen Faucet \u2013 16.5\" Brushed Nickel",
+          "price_minor": 7200,
+          "fit": null,
+          "kw": true,
+          "url": "https://maxfaucets.ca/products/single-handle-pull-out-kitchen-faucet-brushed-nickel-hm-p713-bn?variant=39294766907592&_gsid=e5RB9kG3nfft&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Kitchen Faucet with Pull Down Sprayer Single Handle Single Hole High Arc Spring Commercial Sink Faucet \u2013 360\u00b0 Swivel Splash-Proof Nozzle, Matte Black Chrome Brushed Nickel, Modern Monobloc Mixer Tap",
+          "price_minor": 7199,
+          "fit": null,
+          "kw": true,
+          "url": "https://veranesthome.com/products/kitchen-faucet-pull-down-sprayer-single-handle-high-arc?variant=46931937525948&_gsid=e5RB9kG3nfft&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    }
+  },
+  {
+    "clip": "real_bulb_burnout.mp4",
+    "keywords": [
+      "bulb"
+    ],
+    "description": "incandescent light bulb whose filament burns out: needs a replacement bulb",
+    "full": {
+      "diagnosis": {
+        "item": "DIY electrical experiment setup (black SLA battery, alligator clip leads, aluminum foil, and clear bottle with red rubber bands)",
+        "brand": "",
+        "model": "",
+        "broken_part": "Improvised filament and exposed contact at left end of clear cylinder",
+        "failure": "No commercial broken appliance is visible; an improvised foil-and-wire setup is overheating and glowing/burning directly across a battery without a proper socket or current limiting, and dims/flickers by 00:11-00:12.",
+        "specs": [
+          {
+            "name": "Power source type",
+            "value": "Sealed lead-acid battery with 2 spade terminals (likely 6V or 12V)",
+            "source": "inferred"
+          },
+          {
+            "name": "Lead connector type",
+            "value": "Alligator clip test leads",
+            "source": "seen"
+          },
+          {
+            "name": "Conductor material",
+            "value": "Household aluminum foil strip",
+            "source": "seen"
+          }
+        ],
+        "evidence": [
+          {
+            "t": "00:00",
+            "observation": "Clear plastic cylinder wrapped in red rubber bands and aluminum foil is wired to a black rectangular battery via yellow alligator clip leads; no glow at the left tip."
+          },
+          {
+            "t": "00:01",
+            "observation": "Hand touches an alligator clip to the left tip of the cylinder, producing a bright orange glow/flame."
+          },
+          {
+            "t": "00:06",
+            "observation": "Left tip continues glowing steadily while unattended, with bright reflection visible in the right end of the cylinder."
+          },
+          {
+            "t": "00:12",
+            "observation": "Glow at the tip has diminished and hand returns holding an alligator clip to the left contact."
+          }
+        ],
+        "replace": "Replace the improvised foil-and-filament assembly with a proper low-voltage bulb socket, compatible 12V bulb, and an inline fuse.",
+        "repair_tip": "Disconnect the alligator clips from the battery terminals first so the hot contact cools down and cannot short-circuit. Avoid running bare foil and exposed glowing filaments directly across a lead-acid battery without an inline fuse and proper insulated holder.",
+        "search_queries": [
+          "12V miniature bulb socket holder with wire leads",
+          "insulated alligator clip test leads",
+          "inline blade fuse holder 12V"
+        ],
+        "best_frame_seconds": 1,
+        "confidence": 0.35,
+        "uncertainties": [
+          "No brand, model, voltage, or Ah rating is readable on the black battery.",
+          "The exact material of the glowing element at the left tip (e.g., graphite, nichrome wire, or small filament) cannot be identified.",
+          "No audio is present to confirm whether a component failed or if this is an intentional science demonstration."
+        ]
+      },
+      "timings": {
+        "upload_s": 3.15,
+        "diagnose_s": 12.25,
+        "search_s": 0.91,
+        "gate_s": 0.19,
+        "rank_s": 6.17,
+        "total_s": 22.79
+      },
+      "latency_s": 22.79,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": false,
+      "judge@3": false,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": false,
+          "why": "This is a bulb holder/socket, not a replacement bulb."
+        },
+        {
+          "index": 1,
+          "fixes": false,
+          "why": "This is a bulb socket/holder, not a replacement bulb."
+        },
+        {
+          "index": 2,
+          "fixes": false,
+          "why": "This is an automotive fuse holder, not a replacement bulb."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Screw-In E12 Mini Bulb Holder, 5 Pack Light Beads Lamp Bases Socket Circuit Electrical Experiment Lighting DIY Accessories, White",
+          "price_minor": 814,
+          "fit": 0.554,
+          "kw": true,
+          "url": "https://www.harfington.com/products/p-1312311?variant=46177368801529&_gsid=CXsQBymhmpmK&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "G4 Bulb Socket, AC/DC 12-30V 30cm Long LED Lamp Base Holder, Plastic Black, Pack of 10",
+          "price_minor": 804,
+          "fit": 0.564,
+          "kw": true,
+          "url": "https://www.harfington.com/products/p-1441186?variant=46177493451001&_gsid=CXsQBymhmpmK&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Inline Mini Blade Fuse Holder - (ATM) Automotive Fuse Holder Weatherproof",
+          "price_minor": 299,
+          "fit": 0.403,
+          "kw": false,
+          "url": "https://vetco.net/products/inline-mini-blade-fuse-holder-atm-automotive-fuse-holder-weatherproof?variant=42878711038089&_gsid=3tfQVYQ2ddek&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    },
+    "baseline": {
+      "query": "12V light bulb",
+      "latency_s": 4.89,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": true,
+      "judge@3": true,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": true,
+          "why": "It is a replacement light bulb."
+        },
+        {
+          "index": 1,
+          "fixes": true,
+          "why": "It is a replacement light bulb."
+        },
+        {
+          "index": 2,
+          "fixes": true,
+          "why": "It is a replacement light bulb."
+        }
+      ],
+      "top3": [
+        {
+          "title": "12V 24V 2W E26 E27 B11 Medium Base COB Filament LED Light Bulb",
+          "price_minor": 1199,
+          "fit": null,
+          "kw": true,
+          "url": "https://12vmonster.com/products/12v-24v-36v-2w-e26-e27-b11-medium-base-cob-filament-led-light-bulb?variant=38587362317&_gsid=YER7ZeU4jcTm&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Satco S3468 20W 12V G4  halogen light bulb",
+          "price_minor": 399,
+          "fit": null,
+          "kw": true,
+          "url": "https://www.bulbamerica.com/products/satco-s3468-20w-12v-g4-halogen-light-bulb?variant=821374041&_gsid=YER7ZeU4jcTm&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "G4 LED Bulb 12V, Warm White",
+          "price_minor": 1499,
+          "fit": null,
+          "kw": true,
+          "url": "https://www.kohree.com/products/g4-led-bulb-12v-warm-white?variant=40759666114608&_gsid=YER7ZeU4jcTm&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    }
+  },
+  {
+    "clip": "real_flickering_bulb.mp4",
+    "keywords": [
+      "bulb"
+    ],
+    "description": "flickering light bulb in a ceiling fixture: needs a replacement bulb",
+    "full": {
+      "diagnosis": {
+        "item": "Ceiling light socket fixture with LED bulb",
+        "brand": "",
+        "model": "",
+        "broken_part": "LED bulb diffuser dome / ceiling fixture shade (possibly damaged socket edge)",
+        "failure": "Exposed, harsh unshielded LED emitter with a missing diffuser/shade over an unpainted ceiling footprint and a dark gap/chip at the lower-left base edge",
+        "specs": [
+          {
+            "name": "Mounting location",
+            "value": "Flush ceiling mount",
+            "source": "seen"
+          },
+          {
+            "name": "Light source type",
+            "value": "LED (multi-diode array visible in lens flare)",
+            "source": "seen"
+          },
+          {
+            "name": "Socket base type",
+            "value": "Unconfirmed (likely E26/E27 screw or B22 bayonet)",
+            "source": "inferred"
+          },
+          {
+            "name": "Color temperature",
+            "value": "Cool white / daylight",
+            "source": "seen"
+          }
+        ],
+        "evidence": [
+          {
+            "t": "00:00",
+            "observation": "Small round ceiling socket base visible with an unpainted ring around it and a dark notch/gap on the lower-left edge."
+          },
+          {
+            "t": "00:07",
+            "observation": "Bright unshielded central light source with a hexagonal LED array pattern visible in the lens flare to the left."
+          },
+          {
+            "t": "00:18",
+            "observation": "Camera tilts back up showing the same exposed ceiling bulb casting harsh direct glare."
+          }
+        ],
+        "replace": "Replacement LED bulb (matching the socket base) or a complete flush-mount LED ceiling light fixture to cover the exposed base and unpainted ring",
+        "repair_tip": "Turn off power at the wall switch and circuit breaker before touching the fixture; unscrew or unclip the existing bulb to check the base type (E26/E27 or B22), or replace the entire batten holder with a covered flush-mount fixture.",
+        "search_queries": [
+          "flush mount LED ceiling light fixture",
+          "E27 A19 LED bulb cool white",
+          "B22 bayonet LED bulb cool white"
+        ],
+        "best_frame_seconds": 7,
+        "confidence": 0.45,
+        "uncertainties": [
+          "No brand, model number, voltage, or wattage markings are readable due to glare and distance.",
+          "Socket connector type (E26/E27 screw vs. B22 bayonet vs. integrated LED puck) cannot be verified while the bulb is lit and installed.",
+          "No spoken audio explains whether the bulb is flickering/dim, missing its diffuser dome, or missing a fixture cover."
+        ]
+      },
+      "timings": {
+        "upload_s": 3.47,
+        "diagnose_s": 12.18,
+        "search_s": 0.57,
+        "gate_s": 0.17,
+        "rank_s": 7.98,
+        "total_s": 24.54
+      },
+      "latency_s": 24.54,
+      "kw@1": false,
+      "kw@3": false,
+      "judge@1": false,
+      "judge@3": false,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": false,
+          "why": "This is a complete ceiling light fixture, not a replacement bulb."
+        },
+        {
+          "index": 1,
+          "fixes": false,
+          "why": "This is a complete ceiling light fixture, not a replacement bulb."
+        },
+        {
+          "index": 2,
+          "fixes": false,
+          "why": "This is a complete ceiling light fixture, not a replacement bulb."
+        }
+      ],
+      "top3": [
+        {
+          "title": "13 inch Flush Mount LED Ceiling Light Fixture, 2700K/3000K/3500K/4000K/5000K Adjustable Ceiling Lights, Brushed Nickel Saturn Dimmable Lighting for Hallway Bathroom Kitchen or Stairwell, ETL Listed",
+          "price_minor": 5898,
+          "fit": 0.817,
+          "kw": false,
+          "url": "https://www.matildaco.com/products/13-inch-flush-mount-led-ceiling-light-fixture-2700k-3000k-3500k-4000k-5000k-adjustable-ceiling-lights-brushed-nickel-saturn-dimmable-lighting-for-hallway-bathroom-kitchen-or-stairwell-etl-listed?variant=44778036461654&_gsid=6ad8mpfzcFWf&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Dimmable Wood LED Flush Mount Ceiling Light, 2700K-6000K Selectable Modern Round Close to Ceiling Lighting Fixtures, Minimalist White Ceiling Lamp for Living Room, Bedroom, Laundry Room, 15.8\"",
+          "price_minor": 3199,
+          "fit": 0.746,
+          "kw": false,
+          "url": "https://justcloseoutscanada.ca/products/yiisem-dimmable-wood-led-flush-mount-ceiling-light-2700k-6000k-selectable-modern-round-close-to-ceiling-lighting-fixtures-minimalist-white-ceiling-lamp-for-living-room-bedroom-laundry-room?variant=43726565867711&_gsid=6ad8mpfzcFWf&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Contemporary LED Flush Mount Ceiling Fixture - Modern Bright Light",
+          "price_minor": 6534,
+          "fit": 0.666,
+          "kw": false,
+          "url": "https://taalita-shop.com/products/contemporary-led-flush-mount-ceiling-fixture-modern-bright-light?variant=63780631183737&_gsid=6ad8mpfzcFWf&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    },
+    "baseline": {
+      "query": "recessed downlight fixture",
+      "latency_s": 4.1,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": false,
+      "judge@3": false,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": false,
+          "why": "This is a recessed downlight retrofit fixture, not a replacement light bulb."
+        },
+        {
+          "index": 1,
+          "fixes": false,
+          "why": "This is a recessed downlight fixture, not a replacement light bulb."
+        },
+        {
+          "index": 2,
+          "fixes": false,
+          "why": "This is a recessed downlight retrofit fixture, not a replacement light bulb."
+        }
+      ],
+      "top3": [
+        {
+          "title": "NICOR 5/6in. 878Lm LED Downlight in White w/ Baffle, 3000K Round Recessed Light",
+          "price_minor": 899,
+          "fit": null,
+          "kw": true,
+          "url": "https://www.bulbamerica.com/products/nicor-5-6-inch-800-lumen-led-recessed-downlight-retrofit-light-fixture-in-white-baffle-3000k?variant=2010350452754&_gsid=3EaRY7ZJKpQu&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Feit Electric LEDR56HO/6WYCA Dimmable Recessed Downlight, White",
+          "price_minor": 1799,
+          "fit": null,
+          "kw": false,
+          "url": "https://www.lifeandhome.com/products/feit-electric-ledr56ho-6wyca-dimmable-recessed-downlight-white?variant=45151393972384&_gsid=3EaRY7ZJKpQu&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "RAB R4R89FA120WB ADJUSTABLE CCT LED RECESSED DOWNLIGHT, 8W, 120V, 4-INCH, WHITE",
+          "price_minor": 1899,
+          "fit": null,
+          "kw": false,
+          "url": "https://www.toomanyamps.com/products/rab-r4r89fa120wb-adjustable-cct-led-recessed-downlight-8w-120v-4-inch-white?variant=42788864164011&_gsid=3EaRY7ZJKpQu&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    }
+  },
+  {
+    "clip": "real_tire_leak.mp4",
+    "keywords": [
+      "tire"
+    ],
+    "description": "car tire with a slow leak found with soapy water: needs a tire plug/patch repair kit (or a new tire)",
+    "full": {
+      "diagnosis": {
+        "item": "Tubeless automotive tire",
+        "brand": "",
+        "model": "",
+        "broken_part": "Outer shoulder tread block",
+        "failure": "Punctured by an embedded metal nail or screw causing an active air leak, evidenced by expanding soap bubbles.",
+        "specs": [
+          {
+            "name": "Tire type",
+            "value": "Tubeless radial passenger tire",
+            "source": "seen"
+          },
+          {
+            "name": "Puncture location",
+            "value": "Outer shoulder tread block (outside outermost circumferential groove)",
+            "source": "seen"
+          },
+          {
+            "name": "Tire size and load/speed rating",
+            "value": "Not visible in clip (read from sidewall before ordering a replacement tire)",
+            "source": "inferred"
+          }
+        ],
+        "evidence": [
+          {
+            "t": "00:01",
+            "observation": "Soapy water is sprayed onto the outer area of the tire tread."
+          },
+          {
+            "t": "00:04",
+            "observation": "Soap solution begins forming a large bubble over a round metal fastener head embedded in the outer tread block."
+          },
+          {
+            "t": "00:09",
+            "observation": "Clear close-up shows the metal nail or screw head and continuous air leakage expanding the bubbles."
+          }
+        ],
+        "replace": "Replacement tire matching the sidewall size (punctures in the outer shoulder block outside the main tread grooves are generally unsafe for permanent patching; a tubeless tire plug kit is only suitable as an emergency temporary fix to reach a shop).",
+        "repair_tip": "Check the sidewall for the exact tire size and have a tire shop inspect whether the puncture is within the repairable crown zone. Do not drive at highway speeds or on a low tire; install the spare or use a temporary tubeless plug kit only to get to a service center.",
+        "search_queries": [
+          "tubeless tire repair plug kit heavy duty",
+          "passenger car replacement tire",
+          "12V portable tire inflator air compressor"
+        ],
+        "best_frame_seconds": 8,
+        "confidence": 0.92,
+        "uncertainties": [
+          "Tire brand, model, and sidewall size designation are not shown in the clip.",
+          "Whether the fastener is a nail or screw and its angle of entry cannot be seen until removed.",
+          "Exact distance from the internal sidewall flex zone determines if a shop can safely patch it or if full tire replacement is required."
+        ]
+      },
+      "timings": {
+        "upload_s": 3.86,
+        "diagnose_s": 9.69,
+        "search_s": 0.85,
+        "gate_s": 0.19,
+        "rank_s": 3.4,
+        "total_s": 18.15
+      },
+      "latency_s": 18.15,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": true,
+      "judge@3": true,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": true,
+          "why": "It is a passenger car tire, which is a direct replacement for a leaking tire."
+        },
+        {
+          "index": 1,
+          "fixes": true,
+          "why": "It is a passenger car tire, which is a direct replacement for a leaking tire."
+        },
+        {
+          "index": 2,
+          "fixes": true,
+          "why": "It is a passenger car tire, which is a direct replacement for a leaking tire."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Goodyear Eagle LS-2 Tires 225/50R18",
+          "price_minor": 19016,
+          "fit": 0.362,
+          "kw": true,
+          "url": "https://www.westcoastwheelsandtires.com/products/goodyear-eagle-ls-2-tires-706171163?variant=44607410896919&_gsid=s3EYrWbsiz8R&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Goodyear 225/55R17 Eagle LS-2 Tires",
+          "price_minor": 16599,
+          "fit": 0.322,
+          "kw": true,
+          "url": "https://wheelwarehouse.com/products/goodyear-225-55r17-eagle-ls-2-tires-706447163?variant=49785897386272&_gsid=s3EYrWbsiz8R&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "General Altimax RT45 225/60R16",
+          "price_minor": 13399,
+          "fit": 0.307,
+          "kw": true,
+          "url": "https://dantetires.com/products/general-altimax-rt45-225-60r16-t?variant=45458952618269&_gsid=s3EYrWbsiz8R&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    },
+    "baseline": {
+      "query": "car tire",
+      "latency_s": 3.07,
+      "kw@1": false,
+      "kw@3": true,
+      "judge@1": true,
+      "judge@3": true,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": true,
+          "why": "This is a car tire, which serves as a direct replacement for the leaking tire."
+        },
+        {
+          "index": 1,
+          "fixes": true,
+          "why": "This is a car tire, which serves as a direct replacement for the leaking tire."
+        },
+        {
+          "index": 2,
+          "fixes": true,
+          "why": "This is a car tire, which serves as a direct replacement for the leaking tire."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Accelera Iota EVT (PHI)",
+          "price_minor": 6300,
+          "fit": null,
+          "kw": false,
+          "url": "https://tirestreets.com/products/accelera-iota-evt?variant=41089522008122&_gsid=u95NYtYumNh4&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Armstrong Blu Trac HP",
+          "price_minor": 6758,
+          "fit": null,
+          "kw": true,
+          "url": "https://tirestreets.com/products/armstrong-blu-trac-hp?variant=41470909087802&_gsid=u95NYtYumNh4&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Toyo Proxes Sport Tire 225/40ZR18 92Y",
+          "price_minor": 16583,
+          "fit": null,
+          "kw": true,
+          "url": "https://streetdrivenperformance.com/products/toyo-proxes-sport-tire-225-40zr18-92y?variant=62525175431327&_gsid=u95NYtYumNh4&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    }
+  },
+  {
+    "clip": "real_worn_bike_rim.mp4",
+    "keywords": [
+      "rim"
+    ],
+    "description": "bicycle rim worn through by rim brakes after 75,000 miles (handlebar-cam ride footage; failure is hard to see): needs a replacement rim or wheel",
+    "full": {
+      "diagnosis": {
+        "item": "Road bicycle with drop handlebars and exposed-cable STI shifters",
+        "brand": "",
+        "model": "",
+        "broken_part": "Unconfirmed drivetrain or rear-wheel component (likely bicycle chain, derailleur hanger, or spoke; not visible on camera) ",
+        "failure": "Sudden metallic snap/clunk while pedaling uphill at 00:09, forcing the rider to stop and crouch beside the rear drivetrain; the handlebar-mounted camera never faces the broken part.",
+        "specs": [
+          {
+            "name": "Handlebar style",
+            "value": "Drop bar with external shift cable routing",
+            "source": "seen"
+          },
+          {
+            "name": "Drivetrain speed count",
+            "value": "Unknown (verify rear cassette cog count before buying chain or quick-link, typically 8/9/10-speed for exposed-cable STI shifters of this style) ",
+            "source": "inferred"
+          },
+          {
+            "name": "Replacement type",
+            "value": "Verify whether chain, quick-link, derailleur hanger, or spoke failed before purchasing",
+            "source": "inferred"
+          }
+        ],
+        "evidence": [
+          {
+            "t": "00:09",
+            "observation": "Loud metallic snap/clunk occurs while riding uphill, followed by coasting to a stop."
+          },
+          {
+            "t": "00:11",
+            "observation": "Rider looks down toward the frame/drivetrain and pulls over to the left shoulder."
+          },
+          {
+            "t": "00:28",
+            "observation": "Rider's shadow on the roadside bank shows them crouching beside the rear wheel/drivetrain to inspect the bike."
+          },
+          {
+            "t": "00:33",
+            "observation": "Both drop-bar brake/shift levers and exposed shift cables remain intact in frame, ruling out a snapped shift cable at the hoods."
+          }
+        ],
+        "replace": "Confirm the failed part visually first; if the chain snapped, buy a speed-matched bicycle chain and quick-link (or a model-specific derailleur hanger / spoke if one of those failed).",
+        "repair_tip": "Inspect the chain, rear derailleur hanger, and spokes before ordering parts; if the chain snapped, count the rear cassette cogs and use a chain tool with a matching-speed quick-link to repair or replace it.",
+        "search_queries": [
+          "road bicycle chain speed matched",
+          "bicycle chain quick link",
+          "road bike rear derailleur hanger"
+        ],
+        "best_frame_seconds": 33,
+        "confidence": 0.2,
+        "uncertainties": [
+          "The handlebar-mounted camera faces forward for the entire clip, so the broken component is never visible in frame.",
+          "Bicycle brand, model, and drivetrain speed count cannot be read.",
+          "While a snapped chain under climbing load is most consistent with the sound and inspection posture, a broken spoke, cassette tooth, pedal/crank issue, or derailleur hanger failure cannot be ruled out."
+        ]
+      },
+      "timings": {
+        "upload_s": 3.41,
+        "diagnose_s": 20.18,
+        "search_s": 0.89,
+        "gate_s": 0.44,
+        "rank_s": 5.31,
+        "total_s": 30.41
+      },
+      "latency_s": 30.41,
+      "kw@1": false,
+      "kw@3": false,
+      "judge@1": false,
+      "judge@3": false,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": false,
+          "why": "This is a bicycle chain quick-link, not a replacement rim or wheel."
+        },
+        {
+          "index": 1,
+          "fixes": false,
+          "why": "This is a bicycle chain, not a replacement rim or wheel."
+        },
+        {
+          "index": 2,
+          "fixes": false,
+          "why": "This is a 9-speed bicycle chain, not a replacement rim or wheel."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Shimano Bicycle Chain Quick-Links - Pack of 2",
+          "price_minor": 1800,
+          "fit": 0.306,
+          "kw": false,
+          "url": "https://www.brighamoutdoors.com/products/shimano-bicycle-chain-quick-links-pack-of-2?variant=43558395772976&_gsid=wpqH9Y6C96YG&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Z8.3",
+          "price_minor": 1072,
+          "fit": 0.246,
+          "kw": false,
+          "url": "https://kmcchain.us/products/z8-3?variant=40158152065164&_gsid=71nVoa4jCTVZ&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Shimano CN-HG53 9-speed Chain",
+          "price_minor": 2390,
+          "fit": 0.239,
+          "kw": false,
+          "url": "https://silverbackbikes.de/products/shimano-cn-hg53-9speed-chain?variant=33311575998602&_gsid=71nVoa4jCTVZ&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    },
+    "baseline": {
+      "query": "road bike brake lever hood",
+      "latency_s": 6.13,
+      "kw@1": false,
+      "kw@3": false,
+      "judge@1": false,
+      "judge@3": false,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": false,
+          "why": "This is a set of brake shift lever hoods, not a replacement rim or wheel."
+        },
+        {
+          "index": 1,
+          "fixes": false,
+          "why": "These are brake lever hoods, not a replacement rim or wheel."
+        },
+        {
+          "index": 2,
+          "fixes": false,
+          "why": "These are brake lever hoods, not a replacement rim or wheel."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Shimano GRX ST-RX810 Brake Shift Lever Hoods (Shifter Hood Set)",
+          "price_minor": 1700,
+          "fit": null,
+          "kw": false,
+          "url": "https://ultimatesportstrinidad.com/products/shimano-grx-st-rx810-brake-lever-hoods?variant=40156996599862&_gsid=do6egCCDbY6E&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Brake Lever Hoods for Shimano Super Road Lever",
+          "price_minor": 1400,
+          "fit": null,
+          "kw": false,
+          "url": "https://www.rivbike.com/products/shimano-road-brake-lever-hoods?variant=23334426241&_gsid=do6egCCDbY6E&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Road Brake Lever Hoods",
+          "price_minor": 1700,
+          "fit": null,
+          "kw": false,
+          "url": "https://shopbikesupply.com/products/road-brake-lever-hoods?variant=46704444145912&_gsid=do6egCCDbY6E&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    }
+  },
+  {
+    "clip": "kitchen_blender_burnt_motor.mp4",
+    "keywords": [
+      "blender"
+    ],
+    "description": "blender base with burnt-out motor windings: needs a replacement blender motor/base or a new blender",
+    "full": {
+      "diagnosis": {
+        "item": "Electric motor armature (rotor assembly with copper windings and laminated core shaft, brand and appliance unknown)",
+        "brand": "",
+        "model": "",
+        "broken_part": "Armature assembly (no specific damaged component visible in frame)",
+        "failure": "No burnt insulation, severed copper strands, or cracked core visible in the shown angles; hidden winding short, open circuit, or unseen commutator/bearing wear is possible",
+        "specs": [
+          {
+            "name": "Component type",
+            "value": "Copper-wound laminated motor armature with shaft",
+            "source": "seen"
+          },
+          {
+            "name": "Slot count",
+            "value": "12 slots (approx., partial view)",
+            "source": "inferred"
+          },
+          {
+            "name": "Shaft diameter and overall length",
+            "value": "Must be measured with calipers (not visible)",
+            "source": "inferred"
+          },
+          {
+            "name": "Core outer diameter and stack length",
+            "value": "Must be measured before ordering",
+            "source": "inferred"
+          },
+          {
+            "name": "Voltage and wattage rating",
+            "value": "Must match host motor nameplate",
+            "source": "inferred"
+          }
+        ],
+        "evidence": [
+          {
+            "t": "00:00",
+            "observation": "Close-up of copper armature windings, beige slot insulators, red end-insulation coating, and laminated steel core with central shaft"
+          },
+          {
+            "t": "00:04",
+            "observation": "Side angle shows intact copper wire bundles and red resin at the lamination slots with no obvious charring or broken strands"
+          },
+          {
+            "t": "00:07",
+            "observation": "Upper shaft sleeve and winding crown remain intact; commutator and bearings are not visible in frame"
+          }
+        ],
+        "replace": "Exact OEM replacement motor armature matching the host tool or appliance model number, or the complete motor assembly",
+        "repair_tip": "Unplug the device completely, inspect the unseen commutator end and bearings for wear, and test winding resistance with a multimeter before installing a matching OEM armature.",
+        "search_queries": [
+          "OEM replacement electric motor armature rotor",
+          "universal motor armature assembly",
+          "electric motor rotor shaft copper winding replacement"
+        ],
+        "best_frame_seconds": 0,
+        "confidence": 0.45,
+        "uncertainties": [
+          "No brand, model number, or rating label is visible in any frame",
+          "No audio is present to identify the appliance or reported failure symptom",
+          "No clear physical damage is visible in the clip; the commutator, brushes, and bearings are out of frame",
+          "Exact dimensional and electrical specs cannot be determined without measurements or the host device model"
+        ]
+      },
+      "timings": {
+        "upload_s": 4.09,
+        "diagnose_s": 10.78,
+        "search_s": 0.92,
+        "gate_s": 0.3,
+        "rank_s": 5.03,
+        "total_s": 21.23
+      },
+      "latency_s": 21.23,
+      "kw@1": false,
+      "kw@3": false,
+      "judge@1": false,
+      "judge@3": false,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": false,
+          "why": "This is an armature assembly for DEWALT power tools, not a blender motor/base or a new blender."
+        },
+        {
+          "index": 1,
+          "fixes": false,
+          "why": "This is an armature rotor for a Bosch GBM 6RE power tool, not a blender motor/base or a new blender."
+        },
+        {
+          "index": 2,
+          "fixes": false,
+          "why": "This is an armature rotor for Milwaukee electric tool motors, not a blender motor/base or a new blender."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Dewalt n899443 Armature Assembly Replacement Part",
+          "price_minor": 5738,
+          "fit": 0.234,
+          "kw": false,
+          "url": "https://voomisupply.com/products/dewalt-n899443-armature-assembly-replacement-part?variant=51161608913202&_gsid=JRJUvuDbZ2YZ&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Bosch Armature (Rotor) 2609120337 for GBM 6RE",
+          "price_minor": 2170,
+          "fit": 0.231,
+          "kw": false,
+          "url": "https://wowtoolz.com/products/bosch-armature-rotor-2609120337-for-gbm-6re?variant=49234400477403&_gsid=UwsWRGdypTuG&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Milwaukee 16-30-0210 Armature Rotor For Electric Tool Motors",
+          "price_minor": 3100,
+          "fit": 0.209,
+          "kw": false,
+          "url": "https://plgautomation.com/products/milwaukee-16-30-0210-armature-rotor-for-electric-tool-motors?variant=51699928760622&_gsid=UwsWRGdypTuG&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    },
+    "baseline": {
+      "query": "electric motor armature",
+      "latency_s": 3.25,
+      "kw@1": false,
+      "kw@3": false,
+      "judge@1": false,
+      "judge@3": false,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": false,
+          "why": "This is a 12V armature for a Hitachi electric motor, not a blender motor/base or a new blender."
+        },
+        {
+          "index": 1,
+          "fixes": false,
+          "why": "This is an electric motor armature for power tool repair, not a blender."
+        },
+        {
+          "index": 2,
+          "fixes": false,
+          "why": "This is a 12V armature for a Bosch electric motor, not a blender motor/base or a new blender."
+        }
+      ],
+      "top3": [
+        {
+          "title": "12V Armature for Hitachi - New Electric Motor Part, 215.5mm Length",
+          "price_minor": 11229,
+          "fit": null,
+          "kw": false,
+          "url": "https://pelhamequipment.com/products/12v-armature-for-hitachi-new-electric-motor-part-215-5mm-length?variant=51758485406006&_gsid=TLxVNbFxd9r5&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Electric Motor Armature for Power Tool Repair",
+          "price_minor": 10000,
+          "fit": null,
+          "kw": false,
+          "url": "https://autoforgeusa.com/products/armature-motor-for-power-tool-maintenance-electric-motor-406871649563?variant=67917783957819&_gsid=TLxVNbFxd9r5&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "12V CW Armature for Bosch, New Electric Motor Part, 10 Splines, 300-24074",
+          "price_minor": 10935,
+          "fit": null,
+          "kw": false,
+          "url": "https://pelhamequipment.com/products/12v-cw-armature-for-bosch-new-electric-motor-part-10-splines-300-24074?variant=51758473478454&_gsid=TLxVNbFxd9r5&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    }
+  },
+  {
+    "clip": "kitchen_espresso_group_gasket.mp4",
+    "keywords": [
+      "gasket"
+    ],
+    "description": "espresso machine group head being serviced; worn group head gasket: needs a replacement group head gasket",
+    "full": {
+      "diagnosis": {
+        "item": "Black rubber seal / gasket ring in labeled bag (background chrome assembly)",
+        "brand": "",
+        "model": "",
+        "broken_part": "Black rubber ring / flat gasket or O-ring (labeled R4.5 on bag)",
+        "failure": "Sample part shown in bag for replacement; no visible tear or break observed in the frames, and no audio description is available",
+        "specs": [
+          {
+            "name": "Bag label",
+            "value": "R4.5",
+            "source": "seen"
+          },
+          {
+            "name": "Color",
+            "value": "Black",
+            "source": "seen"
+          },
+          {
+            "name": "Material",
+            "value": "Rubber or elastomer",
+            "source": "inferred"
+          },
+          {
+            "name": "Shape",
+            "value": "Circular ring / gasket",
+            "source": "seen"
+          }
+        ],
+        "evidence": [
+          {
+            "t": "00:00",
+            "observation": "A black circular rubber ring is inside a clear zip-top bag marked R4.5 held in front of a bolted chrome bracket."
+          },
+          {
+            "t": "00:02",
+            "observation": "Clear view of the handwritten R4.5 label and the full circular black rubber ring."
+          },
+          {
+            "t": "00:06",
+            "observation": "Full ring profile visible inside the bag against chrome hardware."
+          }
+        ],
+        "replace": "Matching black rubber gasket or O-ring matching the exact inner diameter, outer diameter, and cross-section thickness of the ring labeled R4.5",
+        "repair_tip": "Measure the inner diameter, outer diameter, and thickness of the existing ring with calipers before ordering, and lightly lubricate the new rubber seal with compatible silicone grease before seating it cleanly without pinching.",
+        "search_queries": [
+          "R4.5 rubber gasket ring seal",
+          "black rubber flat gasket O-ring replacement",
+          "chrome hardware rubber seal ring"
+        ],
+        "best_frame_seconds": 2,
+        "confidence": 0.45,
+        "uncertainties": [
+          "No audio or narration is present to identify the chrome machine or device in the background",
+          "The meaning of the handwritten R4.5 label (part code, internal bin number, or dimension) cannot be confirmed visually",
+          "Exact dimensions (inner diameter, outer diameter, and cross-section profile\u2014flat washer vs. round O-ring) cannot be measured without a scale or calipers"
+        ]
+      },
+      "timings": {
+        "upload_s": 3.81,
+        "diagnose_s": 12.51,
+        "search_s": 0.82,
+        "gate_s": 0.3,
+        "rank_s": 9.93,
+        "total_s": 27.49
+      },
+      "latency_s": 27.49,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": false,
+      "judge@3": false,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": false,
+          "why": "This is a custom gasket cutting service for pipe flanges and housings, not a specific espresso machine group head gasket."
+        },
+        {
+          "index": 1,
+          "fixes": false,
+          "why": "This is a generic assorted O-ring repair kit, not a specific replacement group head gasket for an espresso machine."
+        },
+        {
+          "index": 2,
+          "fixes": false,
+          "why": "This is a generic rubber ring gasket with no indication of compatibility with an espresso machine group head."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Custom Ring Gaskets & Seals",
+          "price_minor": 293,
+          "fit": 0.721,
+          "kw": true,
+          "url": "https://fastestgaskets.com/products/ring-gaskets?variant=50659302965305&_gsid=BVJedJrkpvfa&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Nitrile O-Ring Repair Kit \u2013 1020-Piece Assorted Sealing Ring Set",
+          "price_minor": 1799,
+          "fit": 0.545,
+          "kw": false,
+          "url": "https://smartpicksworld.com/products/nitrile-ring-repair-kit?variant=55023818965319&_gsid=mhsq9o6qzgUn&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Rubber Ring Gasket",
+          "price_minor": 1019,
+          "fit": 0.388,
+          "kw": true,
+          "url": "https://www.thetoolsman.com/products/johnson-controls-rubber-ring-gasket-246-424?variant=43850541236401&_gsid=BVJedJrkpvfa&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    },
+    "baseline": {
+      "query": "R45 rubber O-ring",
+      "latency_s": 2.96,
+      "kw@1": false,
+      "kw@3": false,
+      "judge@1": false,
+      "judge@3": false,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": false,
+          "why": "This is an O-ring kit for a bicycle hub, not an espresso machine group head gasket."
+        },
+        {
+          "index": 1,
+          "fixes": false,
+          "why": "This is a generic O-ring assortment, not a specific replacement group head gasket for an espresso machine."
+        },
+        {
+          "index": 2,
+          "fixes": false,
+          "why": "This is an O-ring for a Robot Coupe food processor, not an espresso machine group head gasket."
+        }
+      ],
+      "top3": [
+        {
+          "title": "R45 O-Ring Kit",
+          "price_minor": 1000,
+          "fit": null,
+          "kw": false,
+          "url": "https://chrisking.com/products/r45-o-ring-kit?variant=39348958101622&_gsid=1xWHTh5wbAyP&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "NBR Rubber O-Ring Seal Assortment",
+          "price_minor": 2899,
+          "fit": null,
+          "kw": false,
+          "url": "https://smartpicksworld.com/products/nbr-rubber-ring-seal-assortment?variant=55029922955591&_gsid=1xWHTh5wbAyP&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Robot Coupe - (DA) O-Ring, R30, R45 - 507050",
+          "price_minor": 880,
+          "fit": null,
+          "kw": false,
+          "url": "https://www.pacstandard.com/products/robot-coupe-da-o-ring-r30-r45-507050?variant=2328390724&_gsid=1xWHTh5wbAyP&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    }
+  },
+  {
+    "clip": "kitchen_rusty_cabinet_hinge.mp4",
+    "keywords": [
+      "hinge"
+    ],
+    "description": "rusted, broken cabinet/door hinge: needs a replacement hinge",
+    "full": {
+      "diagnosis": {
+        "item": "Exterior wooden gate or shed door T-hinge",
+        "brand": "",
+        "model": "",
+        "broken_part": "T-hinge assembly and mounting fasteners",
+        "failure": "Heavy rust and paint delamination on the T-hinge strap, missing top screw on the vertical leaf, and rusted nails or screws pulling out of rotting wood",
+        "specs": [
+          {
+            "name": "Hinge type",
+            "value": "T-hinge (tee hinge) with 4-hole vertical leaf",
+            "source": "seen"
+          },
+          {
+            "name": "Material",
+            "value": "Steel or iron (replace with galvanized or stainless steel for outdoor use; painted green currently matches door but rusting through in this environment; exact gauge unknown until removed; measure full strap length and leaf height before buying; exterior wood screws or carriage bolts needed; wood repair may be required if mounting area is rotted; exact dimensions not visible in clip; check door weight before selecting heavy-duty vs standard duty hinge) -> galvanized steel recommended",
+            "source": "inferred"
+          },
+          {
+            "name": "Vertical leaf mounting holes",
+            "value": "4 vertical holes",
+            "source": "seen"
+          }
+        ],
+        "evidence": [
+          {
+            "t": "00:01",
+            "observation": "Two heavily corroded fasteners are pulled partway out of the hinge strap while deep rust and peeling green paint show along the right side of the strap."
+          },
+          {
+            "t": "00:02",
+            "observation": "The vertical T-plate and knuckle are clearly visible, showing the top mounting hole missing its screw and the remaining three screws painted over."
+          },
+          {
+            "t": "00:05",
+            "observation": "Clear view of the sagging hinge alignment and rotting wood fibers behind both the vertical leaf and horizontal strap."
+          }
+        ],
+        "replace": "Replacement heavy-duty galvanized or stainless steel T-hinge with exterior-grade mounting screws (and replacement timber or wood hardener/splice if the mounting wood is too rotted to hold fasteners).",
+        "repair_tip": "Prop up the gate or door to take off the weight, remove the old hinge and loose fasteners, and check that the wood underneath is solid\u2014if it is rotted, repair or reposition onto sound wood before installing the new weather-resistant T-hinge.",
+        "search_queries": [
+          "heavy duty galvanized T-hinge outdoor gate",
+          "stainless steel tee hinge with screws",
+          "exterior gate strap T-hinge"
+        ],
+        "best_frame_seconds": 2,
+        "confidence": 0.85,
+        "uncertainties": [
+          "Exact hinge strap length, thickness, and hole spacing cannot be determined without measuring",
+          "No brand or model markings are visible",
+          "The wood behind the hinge shows rot and may require carpentry repair before a replacement hinge will hold securely"
+        ]
+      },
+      "timings": {
+        "upload_s": 2.63,
+        "diagnose_s": 11.36,
+        "search_s": 1.09,
+        "gate_s": 0.23,
+        "rank_s": 5.05,
+        "total_s": 20.47
+      },
+      "latency_s": 20.47,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": true,
+      "judge@3": true,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": true,
+          "why": "It is a stainless steel tee hinge, which matches the required replacement hinge."
+        },
+        {
+          "index": 1,
+          "fixes": true,
+          "why": "It is a heavy duty T-hinge for doors, gates, and sheds, which matches the required replacement hinge."
+        },
+        {
+          "index": 2,
+          "fixes": true,
+          "why": "It is a stainless steel tee hinge, which matches the required replacement hinge."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Stainless Steel Heavy Duty Tee Hinge",
+          "price_minor": 2823,
+          "fit": 0.832,
+          "kw": true,
+          "url": "https://www.hardwaresource.com/products/stainless-steel-heavy-duty-tee-hinge?variant=46916253188369&_gsid=hMjJtGpLwdgH&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "8\" Galvanised Scotch T-Hinge Pair - Heavy Duty Hinges for Gates, Doors & Sheds",
+          "price_minor": 386,
+          "fit": 0.687,
+          "kw": true,
+          "url": "https://clarkesofcavan.ie/products/8-no-12-tee-hinge?variant=57875931464005&_gsid=xrdQaLLu1TQD&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Stainless Steel Tee Hinge",
+          "price_minor": 4178,
+          "fit": 0.76,
+          "kw": true,
+          "url": "https://www.hardwaresource.com/products/stainless-steel-tee-hinge?variant=68100793827601&_gsid=hMjJtGpLwdgH&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    },
+    "baseline": {
+      "query": "heavy duty gate strap hinge",
+      "latency_s": 5.12,
+      "kw@1": true,
+      "kw@3": true,
+      "judge@1": false,
+      "judge@3": false,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": false,
+          "why": "This is a heavy-duty lift-off strap hinge designed for gates, not a standard cabinet or door hinge."
+        },
+        {
+          "index": 1,
+          "fixes": false,
+          "why": "This is an 18-inch heavy-duty cast iron strap hinge designed for large gates, which is not compatible with a standard cabinet or door."
+        },
+        {
+          "index": 2,
+          "fixes": false,
+          "why": "This is a 13-inch heavy-duty bolt or weld-on gate strap hinge rated for 900 lbs, which is not suitable for a cabinet or standard door."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Heavy Duty Lift-Off Strap Hinge",
+          "price_minor": 6200,
+          "fit": null,
+          "kw": true,
+          "url": "https://www.hardwaresource.com/products/heavy-duty-lift-off-strap-hinge?variant=46915969351953&_gsid=enq8R3Hs7Xpj&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Strap Hinge - Heavy Duty for Gates - 18\" Inch - Up to 200 lbs - Cast Iron - Black Powder Coat Finish - Sold Individually",
+          "price_minor": 4225,
+          "fit": null,
+          "kw": true,
+          "url": "https://www.hingeoutlet.com/products/strap-hinge-heavy-duty-for-gates-18-inch-up-to-200-lbs-cast-iron-black-powder-coat-finish-sold-individually?variant=43068066857212&_gsid=enq8R3Hs7Xpj&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "13\u201d Heavy Duty Gate Strap Hinge \u2013 900 lb Bolt or Weld-On",
+          "price_minor": 4999,
+          "fit": null,
+          "kw": true,
+          "url": "https://www.sidcosupply.com/products/13-inch-heavy-duty-gate-strap-hinge-900lb-bolt-weld-dual-ball-bearing?variant=52344855363863&_gsid=enq8R3Hs7Xpj&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    }
+  },
+  {
+    "clip": "kitchen_immersion_blender_coupling.mp4",
+    "keywords": [
+      "blender"
+    ],
+    "description": "Bosch MaxoMixx immersion (hand) blender with broken plastic coupling latch: needs a replacement blending shaft/attachment or hand blender",
+    "full": {
+      "diagnosis": {
+        "item": "Bosch MaxoMixx 800 W hand blender (immersion blender) lower locking assembly",
+        "brand": "Bosch",
+        "model": "MaxoMixx 800 W",
+        "broken_part": "Attachment release button spring ring (or grey inner locking sleeve assembly) (unconfirmed due to lack of visible fracture or audio explanation; could also be an internal motor coupling issue given the full disassembly of the nose cone).",
+        "failure": "The front attachment-locking mechanism is disassembled; the black dual-button release spring ring has a wooden matchstick wedged across its bowed side arms, suggesting lost spring tension or deformation (or use as an assembly brace/scale reference), though no clear plastic fracture is visible.",
+        "specs": [
+          {
+            "name": "Brand",
+            "value": "Bosch",
+            "source": "seen"
+          },
+          {
+            "name": "Series and power rating",
+            "value": "MaxoMixx 800 W",
+            "source": "seen"
+          },
+          {
+            "name": "Cord and plug",
+            "value": "Coiled black cord with European plug",
+            "source": "seen"
+          },
+          {
+            "name": "Locking components",
+            "value": "Black dual-button release spring ring and grey cylindrical locking sleeve",
+            "source": "seen"
+          },
+          {
+            "name": "Fasteners",
+            "value": "2 small silver Phillips screws",
+            "source": "seen"
+          }
+        ],
+        "evidence": [
+          {
+            "t": "00:01",
+            "observation": "All disassembled components are visible together: Bosch MaxoMixx 800 W sleeve, motor housing, two screws, grey locking sleeve, and black release button ring with matchstick."
+          },
+          {
+            "t": "00:02",
+            "observation": "Clear view of the 'BOSCH MaxoMixx 800 W' branding on the silver outer sleeve and illegible fine print on its black collar."
+          },
+          {
+            "t": "00:05",
+            "observation": "Full view of the black motor handle, coiled cord, European plug, and exposed white drive end."
+          },
+          {
+            "t": "00:07",
+            "observation": "Close-up of the black dual-button release spring ring showing the matchstick wedged horizontally between its curved side arms."
+          }
+        ],
+        "replace": "Bosch MaxoMixx 800W attachment release button ring and/or grey locking sleeve (confirm exact E-Nr from the black collar before ordering).",
+        "repair_tip": "Keep the blender unplugged and inspect the black button ring, grey locking sleeve, and white drive tip for hairline cracks or worn tabs. Realign the grey sleeve and button ring in the housing slots, slide the silver sleeve over, and fasten the two screws.",
+        "search_queries": [
+          "Bosch MaxoMixx 800W release button ring spare part",
+          "Bosch MaxoMixx 800W locking sleeve coupling housing",
+          "Bosch MSM8 hand blender attachment release button"
+        ],
+        "best_frame_seconds": 1,
+        "confidence": 0.6,
+        "uncertainties": [
+          "No audio is available to confirm the user's exact symptom or why the unit was disassembled.",
+          "The exact E-Nr / MSM8xxx model number printed on the black collar of the silver sleeve is too blurry to read.",
+          "No obvious broken tab or snapped plastic is clearly visible; the matchstick wedged in the release ring may indicate weakened spring arms, a repair brace, or a size reference."
+        ]
+      },
+      "timings": {
+        "upload_s": 3.2,
+        "diagnose_s": 42.71,
+        "search_s": 0.9,
+        "gate_s": 0.39,
+        "rank_s": 5.52,
+        "total_s": 52.89
+      },
+      "latency_s": 52.89,
+      "kw@1": false,
+      "kw@3": false,
+      "judge@1": false,
+      "judge@3": false,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": false,
+          "why": "A button is not a replacement blending shaft/attachment or hand blender."
+        },
+        {
+          "index": 1,
+          "fixes": false,
+          "why": "A ring is not a replacement blending shaft/attachment or hand blender."
+        },
+        {
+          "index": 2,
+          "fixes": false,
+          "why": "A locking sleeve is not a replacement blending shaft/attachment or hand blender."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Bosch Button - 00604771",
+          "price_minor": 1195,
+          "fit": 0.418,
+          "kw": false,
+          "url": "https://originalrepairparts.com/products/bosch-00604771?variant=44473166528804&_gsid=nH3VUkhkjWp8&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Bosch Ring - 00608828",
+          "price_minor": 895,
+          "fit": 0.387,
+          "kw": false,
+          "url": "https://genuinereplacementparts.com/products/bosch-00608828?variant=45618387189937&_gsid=jrKfDyWxSjBJ&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Bosch Locking Sleeve - 2600114012",
+          "price_minor": 1795,
+          "fit": 0.27,
+          "kw": false,
+          "url": "https://originalrepairparts.com/products/2600114012?variant=45217207714084&_gsid=3vJQnjrDyT4P&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    },
+    "baseline": {
+      "query": "Bosch MaxoMixx 800W release button ring",
+      "latency_s": 3.68,
+      "kw@1": false,
+      "kw@3": false,
+      "judge@1": false,
+      "judge@3": false,
+      "verdicts": [
+        {
+          "index": 0,
+          "fixes": false,
+          "why": "This is a generic Bosch release button, not a replacement blending shaft, attachment, or hand blender for a Bosch MaxoMixx immersion blender."
+        },
+        {
+          "index": 1,
+          "fixes": false,
+          "why": "This is a door ring for an appliance, not a replacement part for a hand blender."
+        },
+        {
+          "index": 2,
+          "fixes": false,
+          "why": "This is a microwave rotating ring, not a replacement part for a hand blender."
+        }
+      ],
+      "top3": [
+        {
+          "title": "Bosch Release Button - 2608000173",
+          "price_minor": 595,
+          "fit": null,
+          "kw": false,
+          "url": "https://originalrepairparts.com/products/2608000173?variant=45217423786276&_gsid=Zz6huEbkB9x6&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Bosch Door Ring - 00747800",
+          "price_minor": 1895,
+          "fit": null,
+          "kw": false,
+          "url": "https://genuinereplacementparts.com/products/bosch-747800?variant=45481677193393&_gsid=Zz6huEbkB9x6&utm_source=shopify&utm_medium=catalog"
+        },
+        {
+          "title": "Bosch 00648876 Genuine OEM Microwave Rotating Ring",
+          "price_minor": 1550,
+          "fit": null,
+          "kw": false,
+          "url": "https://partstoday.com/products/00648876?variant=43585618870331&_gsid=Zz6huEbkB9x6&utm_source=shopify&utm_medium=catalog"
+        }
+      ]
+    }
+  }
+]

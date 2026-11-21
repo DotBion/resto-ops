@@ -1,0 +1,12 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+uploads/
+eval/clips/*
+!eval/clips/.gitkeep
+eval/results/
+eval/samples/*.mp4
+eval/samples/*.jpg
+!eval/samples/real_*.mp4
+!eval/samples/kitchen_*.mp4

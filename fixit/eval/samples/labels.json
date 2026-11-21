@@ -1,0 +1,121 @@
+{
+  "macbook_cable_clean.mp4": {
+    "keywords": [
+      "magsafe"
+    ],
+    "description": "frayed Apple MagSafe MacBook charger cable",
+    "set": "synthetic"
+  },
+  "macbook_cable_messy.mp4": {
+    "keywords": [
+      "magsafe"
+    ],
+    "description": "frayed Apple MagSafe MacBook charger cable",
+    "set": "synthetic"
+  },
+  "aerator_clean.mp4": {
+    "keywords": [
+      "aerator"
+    ],
+    "description": "worn swivel faucet aerator",
+    "set": "synthetic"
+  },
+  "aerator_messy.mp4": {
+    "keywords": [
+      "aerator"
+    ],
+    "description": "worn swivel faucet aerator",
+    "set": "synthetic"
+  },
+  "brakepads_clean.mp4": {
+    "keywords": [
+      "brake pad"
+    ],
+    "description": "worn metallic disc brake pads",
+    "set": "synthetic"
+  },
+  "brakepads_messy.mp4": {
+    "keywords": [
+      "brake pad"
+    ],
+    "description": "worn metallic disc brake pads",
+    "set": "synthetic"
+  },
+  "umbrella_clean.mp4": {
+    "keywords": [
+      "umbrella"
+    ],
+    "description": "broken umbrella with bent ribs",
+    "set": "synthetic"
+  },
+  "umbrella_messy.mp4": {
+    "keywords": [
+      "umbrella"
+    ],
+    "description": "broken umbrella with bent ribs",
+    "set": "synthetic"
+  },
+  "real_dripping_faucet.mp4": {
+    "keywords": [
+      "faucet"
+    ],
+    "description": "dripping tap/faucet: needs a faucet cartridge, washer/seal kit, or a replacement faucet",
+    "set": "real-household"
+  },
+  "real_bulb_burnout.mp4": {
+    "keywords": [
+      "bulb"
+    ],
+    "description": "incandescent light bulb whose filament burns out: needs a replacement bulb",
+    "set": "real-household"
+  },
+  "real_flickering_bulb.mp4": {
+    "keywords": [
+      "bulb"
+    ],
+    "description": "flickering light bulb in a ceiling fixture: needs a replacement bulb",
+    "set": "real-household"
+  },
+  "real_tire_leak.mp4": {
+    "keywords": [
+      "tire"
+    ],
+    "description": "car tire with a slow leak found with soapy water: needs a tire plug/patch repair kit (or a new tire)",
+    "set": "real-household"
+  },
+  "real_worn_bike_rim.mp4": {
+    "keywords": [
+      "rim"
+    ],
+    "description": "bicycle rim worn through by rim brakes after 75,000 miles (handlebar-cam ride footage; failure is hard to see): needs a replacement rim or wheel",
+    "set": "real-household-hard"
+  },
+  "kitchen_blender_burnt_motor.mp4": {
+    "keywords": [
+      "blender"
+    ],
+    "description": "blender base with burnt-out motor windings: needs a replacement blender motor/base or a new blender",
+    "set": "restaurant"
+  },
+  "kitchen_espresso_group_gasket.mp4": {
+    "keywords": [
+      "gasket"
+    ],
+    "description": "espresso machine group head being serviced; worn group head gasket: needs a replacement group head gasket",
+    "set": "restaurant"
+  },
+  "kitchen_rusty_cabinet_hinge.mp4": {
+    "keywords": [
+      "hinge"
+    ],
+    "description": "rusted, broken cabinet/door hinge: needs a replacement hinge",
+    "set": "restaurant"
+  },
+  "kitchen_immersion_blender_coupling.mp4": {
+    "keywords": [
+      "blender"
+    ],
+    "description": "Bosch MaxoMixx immersion (hand) blender with broken plastic coupling latch: needs a replacement blending shaft/attachment or hand blender",
+    "set": "restaurant"
+  }
+}
