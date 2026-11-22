@@ -13,11 +13,14 @@ from fastapi.responses import FileResponse, JSONResponse, RedirectResponse, Stre
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
+from . import cases as case_store
+from .cases import NewCase
 from .contracts import NewRun, Playhead
 from .journal import Journal
 from .media import (MAX_CAMERA_JPEG_BYTES, MAX_UPLOAD_BYTES, CameraFrames, MediaError,
                     VideoFrames, prepare)
 from .models import GeminiVision
+from .overnight import Overnight
 from .runs import RunConflict, Runs
 from .settings import ROOT, Settings
 from fixit.app import server as fixit_server
@@ -51,17 +54,27 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         settings.home.mkdir(parents=True, exist_ok=True)
         journal = Journal(settings.home / "operations.sqlite3")
         journal.interrupt_runs()
+        case_store.ensure_schema(journal)
         await bundled_source(journal, settings.home, ROOT / "demo" / "counter.mp4", DEMO_ID, DEMO_LABEL, "synthetic")
         await bundled_source(journal, settings.home, REAL_VIDEO, REAL_ID, REAL_LABEL, "cafe")
         app.state.journal = journal
         sink = lambda kind, payload: journal.log("fixit", kind, payload)  # noqa: E731
         fixit_server.EVENT_SINKS.append(sink)
         app.state.upload_lock = asyncio.Semaphore(1)
+        try:
+            case_store.backfill(journal)
+        except Exception:  # noqa: BLE001 - history is best effort
+            pass
         async with httpx.AsyncClient(follow_redirects=False) as client:
             app.state.runs = Runs(journal, settings, GeminiVision(settings, client))
+            app.state.overnight = Overnight(journal, settings, client)
+            scheduler = asyncio.create_task(app.state.overnight.scheduler())
             try:
                 yield
             finally:
+                scheduler.cancel()
+                if app.state.overnight.running:
+                    app.state.overnight.running.cancel()
                 workers = []
                 for runner in list(app.state.runs.active.values()):
                     if runner.worker:
@@ -230,6 +243,48 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
         return StreamingResponse(stream(), media_type="text/event-stream",
                                  headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+
+    # ---- Past cases + overnight analysis (Stress Lab) --------------------------------------
+    @app.get("/api/cases")
+    def list_cases(status: Annotated[Literal["ok", "failed", "timeout", "disagreement"] | None, Query()] = None,
+                   source: Annotated[Literal["fixit", "floor", "stress"] | None, Query()] = None,
+                   area: Annotated[Literal["kitchen", "front-of-house", "inventory", "other"] | None, Query()] = None,
+                   limit: Annotated[int, Query(ge=1, le=500)] = 100):
+        return {"cases": case_store.listing(app.state.journal, status, source, limit=limit, area=area),
+                "counts": case_store.counts(app.state.journal)}
+
+    @app.get("/api/cases/{case_id}")
+    def one_case(case_id: str):
+        case = case_store.get(app.state.journal, case_id)
+        if case is None:
+            raise HTTPException(404, "Case not found.")
+        return case
+
+    @app.post("/api/cases", status_code=201)
+    def record_case(case: NewCase):
+        return case_store.record(app.state.journal, case)
+
+    @app.post("/api/cases/{case_id}/replay", status_code=202)
+    async def replay_case(case_id: str):
+        case = case_store.get(app.state.journal, case_id)
+        if case is None:
+            raise HTTPException(404, "Case not found.")
+        if case["source"] != "floor" or not case.get("input", {}).get("source_id"):
+            raise HTTPException(409, "Only Floor Monitor cases can be replayed on the backend.")
+        try:
+            run = await app.state.runs.replay(case["input"]["source_id"], case_id)
+        except RunConflict as exc:
+            raise HTTPException(409, str(exc)) from exc
+        return {"run_id": run["id"], "case_id": f"floor-{run['id']}", "replay_of": case_id}
+
+    @app.get("/api/analysis/latest")
+    def analysis_latest():
+        return app.state.overnight.status()
+
+    @app.post("/api/analysis/run", status_code=202)
+    async def analysis_run():
+        started = app.state.overnight.trigger("manual")
+        return {"started": started, **app.state.overnight.status()}
 
     @app.get("/api/evaluation")
     def evaluation():

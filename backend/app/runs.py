@@ -3,6 +3,7 @@ import logging
 import time
 import uuid
 
+from . import cases as case_store
 from .analysis import Analysis, run_configuration
 from .contracts import NewRun, Source
 from .journal import Journal
@@ -36,6 +37,8 @@ class Runner:
         self.status = "running"
         self.terminal_error = False
         self.last_activity = time.monotonic()
+        self.replay_of: str | None = None
+        self.driver: asyncio.Task | None = None
 
     def emit(self, *events: tuple[str, dict]) -> None:
         if self.status != "running":
@@ -95,6 +98,10 @@ class Runner:
         self.manager.active.pop(self.id, None)
         if cancel_worker and self.worker:
             self.worker.cancel()
+        try:
+            case_store.record_run(self.manager.journal, self.id, self.replay_of)
+        except Exception:  # a bookkeeping failure must never break a run
+            logger.exception("Could not record a past case for run %s", self.id)
 
     def acknowledge(self, task_id: str) -> dict | None:
         task = self.analysis.tasks.acknowledge(task_id)
@@ -150,3 +157,37 @@ class Runs:
                 return task
             break
         return None
+
+    async def replay(self, source_id: str, replay_of: str) -> dict:
+        """Re-run a stored clip against the current stack, window by window, without a browser."""
+        source = self.journal.source(source_id)
+        if source is None or source.kind == "camera":
+            raise RunConflict("This case has no stored clip to replay (live camera frames are not kept).")
+        provider = "gemini" if self.settings.api_key or source.kind != "synthetic" else "fixture"
+        run = self.start(NewRun(source_id=source_id, provider=provider))
+        runner = self.active[run["id"]]
+        runner.replay_of = replay_of
+
+        async def drive():
+            cadence = runner.config["cadence_ms"]
+            at = min(runner.config["window_ms"], source.duration_ms)
+            try:
+                while runner.status == "running":
+                    final = at >= source.duration_ms
+                    runner.advance(min(at, source.duration_ms), final)
+                    while runner.worker is not None and runner.status == "running":
+                        await asyncio.sleep(0.2)
+                        runner.last_activity = time.monotonic()
+                    if final:
+                        break
+                    at += cadence
+                if runner.status == "running":
+                    runner.finish("completed")
+            except RunConflict:
+                runner.finish("stopped")
+            except Exception:
+                logger.exception("Replay driver failed")
+                runner.finish("failed")
+
+        runner.driver = asyncio.create_task(drive())
+        return run
